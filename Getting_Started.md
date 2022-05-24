@@ -30,9 +30,9 @@ are the positions the labware can be placed. After this, the pipette is loaded
 and tip rack is specified. Finally the commands are given to the robot. This
 particular protocol tells it to pick a tip up from the tip rack at location 2,
 aspirate 100ul from the well A1 on the 96 well plate at location 1, dispense
-100ul into the well B2 on the 96 well plate and then drop the tip. 
+100ul into the well B2 on the 96 well plate and then drop the tip.
 
-``from opentrons import protocol_api
+```from opentrons import protocol_api
 
 # metadata
 metadata = {
@@ -57,4 +57,4 @@ def run(protocol: protocol_api.ProtocolContext):
     left_pipette.pick_up_tip()
     left_pipette.aspirate(100, plate['A1'])
     left_pipette.dispense(100, plate['B2'])
-    left_pipette.drop_tip()``
+    left_pipette.drop_tip()```
