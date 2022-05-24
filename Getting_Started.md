@@ -32,7 +32,8 @@ particular protocol tells it to pick a tip up from the tip rack at location 2,
 aspirate 100ul from the well A1 on the 96 well plate at location 1, dispense
 100ul into the well B2 on the 96 well plate and then drop the tip.
 
-```from opentrons import protocol_api
+```
+from opentrons import protocol_api
 
 # metadata
 metadata = {
