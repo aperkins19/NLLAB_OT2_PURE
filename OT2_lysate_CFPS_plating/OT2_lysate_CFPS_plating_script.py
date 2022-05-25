@@ -18,6 +18,8 @@ def run(protocol: protocol_api.ProtocolContext):
 
     # labware
     nunc_384_flat = protocol.load_labware('corning_384_wellplate_112ul_flat', location='4')
+
+    # config file uploaded to OT2 app in custom labware
     pcr_tube_rack = protocol.load_labware('starlabpcrwsstrips_96_wellplate_200ul', location='8')
     tiprack_1 = protocol.load_labware('opentrons_96_tiprack_20ul', location='2')
 
@@ -51,6 +53,9 @@ def run(protocol: protocol_api.ProtocolContext):
 
     aspirate_wells = [pcr_tube_rack['A1']] * 96
 
+    # In this 2d array, each dim is a row.
+    # The array is then reshaped to flatten to 1D columnwise starting from A1 to P1...A2...P2 etc
+
     dispense_volumes = np.array([
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 0, 0],
@@ -73,12 +78,17 @@ def run(protocol: protocol_api.ProtocolContext):
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ])
 
+    # the flatten command
     dispense_volumes = dispense_volumes.ravel(order="F")
+
 
     aspirate_height = 5
 
 
     p20_pipette.pick_up_tip()
+
+    # iterates over the wells and is passed pipetting volumnes
+
     for aspirate_well, dispense_well, dispense_volume in zip(aspirate_wells, nunc_384_flat.wells(), dispense_volumes):
 
         distribute_energy_solution_and_dna_mix(aspirate_well, dispense_well, aspirate_height, dispense_volume)
