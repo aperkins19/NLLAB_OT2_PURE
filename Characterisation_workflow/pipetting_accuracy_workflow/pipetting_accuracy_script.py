@@ -81,17 +81,15 @@ def run(protocol: protocol_api.ProtocolContext):
         left_pipette.pick_up_tip()
 
         left_pipette.well_bottom_clearance.aspirate = aspirate_height
-        left_pipette.well_bottom_clearance.dispense = 2
+        left_pipette.well_bottom_clearance.dispense = 0.5
 
-
-        left_pipette.aspirate(3, pcr_temp_plate['A3'], rate=0.2)
-
-
-        left_pipette.move_to(pcr_temp_plate['A3'].top(-2))
+        # aspirate step
+        left_pipette.aspirate(3, pcr_temp_plate['B10'], rate=0.2)
+        left_pipette.move_to(pcr_temp_plate['B10'].top(-2))
         protocol.delay(seconds=2)
         left_pipette.touch_tip()
 
-        # Still dispensing 1mm above the bottom
+        # Dispense Step
         left_pipette.dispense(2.5, pcr_temp_plate[well], rate=0.1)
         protocol.delay(seconds=2)
         left_pipette.touch_tip()
@@ -108,15 +106,15 @@ def run(protocol: protocol_api.ProtocolContext):
     temperature_module.set_temperature(4)
 
 
-    # exactly 50mm is 6.5ml on 15ml falcon
-    aspirate_height = 9
+    # exactly 5.2mm is 30ul of lysate in pcr
+    aspirate_height = 5
 
     #right_pipette.pick_up_tip()
     #right_pipette.move_to(reagent_2ml_eppendorfs['A1'].bottom(10))
     #protocol.delay(seconds=8)
     #right_pipette.return_tip()
 
-    dispense_well_list = ['A1', 'B1', 'C1', 'D1', 'E1']
+    dispense_well_list = ['A1', 'A2','A3','A4','A5','A6', 'A7', 'A8', 'A9', 'A10']
 
     for well in dispense_well_list:
 
