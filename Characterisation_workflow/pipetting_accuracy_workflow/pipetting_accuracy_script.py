@@ -107,7 +107,7 @@ def run(protocol: protocol_api.ProtocolContext):
 
 
     # exactly 5.2mm is 30ul of lysate in pcr
-    aspirate_height = 5
+    aspirate_height = 4.7
 
     #right_pipette.pick_up_tip()
     #right_pipette.move_to(reagent_2ml_eppendorfs['A1'].bottom(10))
