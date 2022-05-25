@@ -2,11 +2,11 @@ from opentrons import protocol_api
 
 # metadata
 metadata = {
-    'protocolName': 'Bradford Platting. V.001',
+    'protocolName': 'General Liquid Characterisation Script',
     'author': 'Alex Perkins',
     'email': 'a.j.p.perkins@sms.ed.ac.uk',
-    'description': 'Simple protocol to plate a bradford assay - not dynamic',
-    'apiLevel': '2.11'
+    'description': 'Script to charcterise the pipetting error with handling different liquids.',
+    'apiLevel': '2.3'
 }
 
 
@@ -15,26 +15,21 @@ metadata = {
 def run(protocol: protocol_api.ProtocolContext):
 
     # labware
-    plate = protocol.load_labware('corning_96_wellplate_360ul_flat', '5')
 
-    reagent_falcon_block = protocol.load_labware('opentrons_10_tuberack_falcon_4x50ml_6x15ml_conical','8')
-    reagent_2ml_eppendorfs = protocol.load_labware('opentrons_24_tuberack_eppendorf_2ml_safelock_snapcap', '6')
-
+    # temperature module
+    temperature_module = protocol.load_module('temperature module gen2', 10)
+    pcr_temp_plate = temperature_module.load_labware('opentrons_96_aluminumblock_nest_wellplate_100ul',
+                                      label='Temperature-Controlled Tubes')
 
     # pipettes
     tiprack_20ul = protocol.load_labware('opentrons_96_tiprack_20ul', '9')
     left_pipette = protocol.load_instrument(
          'p20_single_gen2', 'left', tip_racks=[tiprack_20ul])
 
-    tiprack_300ul = protocol.load_labware('opentrons_96_tiprack_300ul', '11')
-    right_pipette = protocol.load_instrument(
-         'p300_single_gen2', 'right', tip_racks=[tiprack_300ul])
-
-
     #    commands
 
     # Dilutions
-
+    """
     # first laydown the stock-30
     def distribute_stock_30(well, aspirate_height):
 
@@ -57,6 +52,7 @@ def run(protocol: protocol_api.ProtocolContext):
 
         right_pipette.drop_tip()
 
+
     def distribute_bradford_reagent(well, aspirate_height):
 
         right_pipette.pick_up_tip()
@@ -76,20 +72,60 @@ def run(protocol: protocol_api.ProtocolContext):
 
         right_pipette.drop_tip()
 
+
+
+    """
+    # first laydown the lysate
+    def distribute_lysate(well, aspirate_height):
+
+        left_pipette.pick_up_tip()
+
+        left_pipette.well_bottom_clearance.aspirate = aspirate_height
+        left_pipette.well_bottom_clearance.dispense = 2
+
+
+        left_pipette.aspirate(3, pcr_temp_plate['A3'], rate=0.2)
+
+
+        left_pipette.move_to(pcr_temp_plate['A3'].top(-2))
+        protocol.delay(seconds=2)
+        left_pipette.touch_tip()
+
+        # Still dispensing 1mm above the bottom
+        left_pipette.dispense(2.5, pcr_temp_plate[well], rate=0.1)
+        protocol.delay(seconds=2)
+        left_pipette.touch_tip()
+
+        #right_pipette.blow_out(reagent_falcon_block['C1'])
+
+        left_pipette.drop_tip()
+
+
+
+
+    #################################################################################################
+    ## Set temperature
+    temperature_module.set_temperature(4)
+
+
     # exactly 50mm is 6.5ml on 15ml falcon
-    aspirate_height = 40
+    aspirate_height = 12
 
     #right_pipette.pick_up_tip()
     #right_pipette.move_to(reagent_2ml_eppendorfs['A1'].bottom(10))
     #protocol.delay(seconds=8)
     #right_pipette.return_tip()
 
-    dispense_well_list = ['A1', 'A2', 'A3', 'A4', 'A5']
+    dispense_well_list = ['A1', 'B1', 'C1', 'D1', 'E1']
 
     for well in dispense_well_list:
 
-        distribute_bradford_reagent(well, aspirate_height)
-        aspirate_height -= 2
+        distribute_lysate(well, aspirate_height)
+        aspirate_height -= 0.1
+
+
+    # turn off temp module
+    temperature_module.deactivate()
 
 
     # 10x to 50x
