@@ -21,6 +21,9 @@ def run(protocol: protocol_api.ProtocolContext):
     pcr_temp_plate = temperature_module.load_labware('opentrons_96_aluminumblock_generic_pcr_strip_200ul',
                                       label='Temperature-Controlled Tubes')
 
+
+    nunc_384 = protocol.load_labware('corning_384_wellplate_112ul_flat', '7')
+
     # pipettes
     tiprack_20ul = protocol.load_labware('opentrons_96_tiprack_20ul', '9')
     left_pipette = protocol.load_instrument(
@@ -81,7 +84,7 @@ def run(protocol: protocol_api.ProtocolContext):
         left_pipette.pick_up_tip()
 
         left_pipette.well_bottom_clearance.aspirate = aspirate_height
-        left_pipette.well_bottom_clearance.dispense = 0.5
+        left_pipette.well_bottom_clearance.dispense = 0.1
 
         # aspirate step
         left_pipette.aspirate(3, pcr_temp_plate['B10'], rate=0.2)
@@ -90,7 +93,7 @@ def run(protocol: protocol_api.ProtocolContext):
         left_pipette.touch_tip()
 
         # Dispense Step
-        left_pipette.dispense(2.5, pcr_temp_plate[well], rate=0.1)
+        left_pipette.dispense(2.5, nunc_384[well], rate=0.1)
         protocol.delay(seconds=2)
         left_pipette.touch_tip()
 
@@ -107,19 +110,19 @@ def run(protocol: protocol_api.ProtocolContext):
 
 
     # exactly 5.2mm is 30ul of lysate in pcr
-    aspirate_height = 4.7
+    aspirate_height = 4.5
 
     #right_pipette.pick_up_tip()
     #right_pipette.move_to(reagent_2ml_eppendorfs['A1'].bottom(10))
     #protocol.delay(seconds=8)
     #right_pipette.return_tip()
 
-    dispense_well_list = ['A1', 'A2','A3','A4','A5','A6', 'A7', 'A8', 'A9', 'A10']
+    dispense_well_list = ['G1','G2','G3','G4','G5','G6','G7','G8','G9','G10']
 
     for well in dispense_well_list:
 
         distribute_lysate(well, aspirate_height)
-        aspirate_height -= 0.1
+        aspirate_height -= 0.4
 
 
     # turn off temp module
