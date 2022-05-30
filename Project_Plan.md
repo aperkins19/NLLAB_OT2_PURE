@@ -1,8 +1,8 @@
 
 
-# 25th May
+## 25th May
 
-## Completed
+### Completed
 * ~Set up temperature module~
 * ~Characterise handling lysate. Create a script to try different parameters
 and see the technical error. **We tried doing this by weighing pcr tubes before
@@ -19,6 +19,17 @@ If this technical error is small then the lysate distribution must be pretty con
 We decided to move onto just pipetting into the 384 well plate and optimising that
 rather than optimising it for pipetting into pcr tubes.~
 
+################################################################################################
+# Michael!!! READ ME
+
+## 30th May
+
+* Changed robot level and recalibrated. Offset seems to be reduced but still occurs. Have discovered that you can, in fact, run a 'Labware Offset Check' when setting up the deck to run a protocol.
+This allows you to tell robot exactly where the bits of labware are and seems to correct the offset. See pipette_offset_data.png in this directory for correction data. This appears to have fixed the problem.
+
+* Run another 10x 2.5ul lysate check: Better ! But pipetting destination in the well is a little inconsistent but maybe this is due to variable pipette curvatures / mounting angles on the pipette.
+
+* Probably good enough to continue to a first CFPS run.
 
 ## To do  - Near term
 
