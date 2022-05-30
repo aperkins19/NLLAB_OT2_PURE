@@ -117,7 +117,7 @@ def run(protocol: protocol_api.ProtocolContext):
     #protocol.delay(seconds=8)
     #right_pipette.return_tip()
 
-    dispense_well_list = ['G1','G2','G3','G4','G5','G6','G7','G8','G9','G10']
+    dispense_well_list = ['H1','H2','H3','H4','H5','H6','H7','H8','H9','H10']
 
     for well in dispense_well_list:
 
