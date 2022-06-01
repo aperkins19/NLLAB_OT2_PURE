@@ -17,6 +17,21 @@ This allows you to tell robot exactly where the bits of labware are and seems to
 
 ## To do  - Near term
 
+* Put all pipetting parameters into a dictionary
+
+* Code wax pipette step and fix pipette
+  * OT2 parts.
+    * Insert sink plugs into 3D printed tube rack with Mirren.
+    * Confirm dimensions + build quality
+    * Order rest of parts from U create.
+
+* Get the Opentron to make a master mix of energy solution, dna, (malachite green),
+chi6, buffer, water. This could be a separate script, *or a modular function that can simply be called upstream of the plating functions*. AP
+
+* Design the technical error optimiser - once we have our 1st 10x cfps replicated. let's sit down with pen, paper and coffee and design the algorithm + software plan next week. AP
+
+## To do - Far term
+
 * **Recalibration**  Get the Opentron to distribute lysate onto the 384 well plate - 10 replicates.
 This seems to be working now, however, we have been having issues with the calibration
 of the opentron. It seems to be off by about 1 mm in the z axis and x axis (it
@@ -24,22 +39,6 @@ is off when picking up a tip even after calibrating.)
   * Alex has brought in his spirit level - use this to ensure the OT2 is level by adjusting feet.
   * Need to do a factory reset
 
-
-* Put all pipetting parameters into a dictionary
-
-* Code wax pipette step and fix pipette
-
-* Get the Opentron to make a master mix of energy solution, dna, (malachite green),
-chi6, buffer, water. This could be a separate script, *or a modular function that can simply be called upstream of the plating functions*. AP
-
-* Design the technical error optimiser - once we have our 1st 10x cfps replicated. let's sit down with pen, paper and coffee and design the algorithm + software plan next week. AP
-
-* OT2 parts.
-  * Insert sink plugs into 3D printed tube rack with Mirren.
-  * Confirm dimensions + build quality
-  * Order rest of parts from U create.
-
-## To do - Far term
 
 * Run successive rounds of technical error reduction active learning.
 
