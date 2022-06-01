@@ -30,6 +30,10 @@ chi6, buffer, water. This could be a separate script, *or a modular function tha
 
 * Design the technical error optimiser - once we have our 1st 10x cfps replicated. let's sit down with pen, paper and coffee and design the algorithm + software plan next week. AP
 
+* Install Black
+
+* create /app in linux of docker
+
 ## To do - Far term
 
 * **Recalibration**  Get the Opentron to distribute lysate onto the 384 well plate - 10 replicates.
