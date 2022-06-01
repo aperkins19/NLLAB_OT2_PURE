@@ -14,42 +14,88 @@ metadata = {
 #dispense_well_list = ['J1','J2','J3','J4','J5','J6','J7','J8','J9','J10']
 
 
-
-# protocol run function. the part after the colon lets your editor know
+# Protocol run function. the part after the colon lets your editor know
 # where to look for autocomplete suggestions
 def run(protocol: protocol_api.ProtocolContext):
 
+    # 0. Defining variables used in protocol-----------------------------------
+
     # labware
 
-    # temperature module
+    # Defining the temperature module
     temperature_module = protocol.load_module('temperature module gen2', 10)
+
+    # Defining the pcr plate ontop of the temperature module
     pcr_temp_plate = temperature_module.load_labware('opentrons_96_aluminumblock_generic_pcr_strip_200ul',
                                       label='Temperature-Controlled Tubes')
-
-
+    # Defining the 384 nunc well plate
     nunc_384 = protocol.load_labware('corning_384_wellplate_112ul_flat', '7')
 
-    #eppendorf_1500ul_x24_rack = protocol.load_labware('opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap', '8')
+    # Defining the 1.5ul eppendorf rack
+    eppendorf_1500ul_x24_rack = protocol.load_labware('opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap', '8')
 
-    # Defining left_pipette pipette and tip rack
+    # Defining the 20ul tip rack
     tiprack_20ul = protocol.load_labware('opentrons_96_tiprack_20ul', '9')
+
+    # Defining left_pipette (p20)
     left_pipette = protocol.load_instrument('p20_single_gen2', 'left', tip_racks=[tiprack_20ul])
 
-    # Defining p300 pipette and tip rack
-    #tiprack_300ul = protocol.load_labware('opentrons_96_tiprack_300ul', '6')
-    #p300 = protocol.load_instrument('p300_single_gen2', 'right', tip_racks=[tiprack_300ul])
+    # Defining the 300ul tip rack
+    tiprack_300ul = protocol.load_labware('opentrons_96_tiprack_300ul', '6')
 
-    #    commands
-    ## Set temperature
-    temperature_module.set_temperature(4)
+    # Defining right_pipette (p300)
+    right_pipette = protocol.load_instrument('p300_single_gen2', 'right', tip_racks=[tiprack_300ul])
+
+    # Defining the eppendorf well where the wax is placed
+    wax_eppendorf_well = eppendorf_1500ul_x24_rack.wells_by_name()['A1']
+
+    # Opentron parameters
+
+    # Defining the aspiration height for 35ul of lysate
+    lysate_aspirate_height = 4.5
+
+    # Defining the increment to move down the lysate aspiration height after
+    # each aspiration
+    lysate_aspirate_height_inc = 0.4
+
+    # Defining the aspiration height for 90ul of substrates
+    substrates_aspirate_height = 9
+
+    # Defining the increment to move down the substrate aspiration height after
+    # each aspiration
+    substrates_aspirate_height_inc = 0.4
+
+    # Defining the dispense volume for wax
+    wax_dispense_volume = 35
+
+    # Defining the dispense height above well for wax
+    wax_dispense_height = -3
+
+    # Defining whether to get a new tip when distribting wax
+    wax_new_tip = "never"
+
+    # Defining whether to touch tip when distribting wax
+    wax_touch_tip = False
+
+    # Defining air gap when distributing wax
+    wax_air_gap = 20
+
+    # Defining the disposal volume that will be thrown away after distributing
+    # wax
+    wax_disposal_volume = 30
+
+    # Defining the wells to dispense into
+    dispense_well_list = ['D1','D2','D3','D4','D5','D6','D7','D8','D9','D10']
 
 
+    protocol_dispense_lysate = True
+    protocol_dispense_subsrates = True
+    protocol_dispense_wax = True
 
-    dispense_well_list = ['B12','B13','B14','B15','B16','B17','B18','B19','B20','B21']
 
-    ############################################################################################################################
+    # 1. Defining functions used in this protocol------------------------------
 
-    # first laydown the lysate
+    # Distributing lysate
     def distribute_lysate(well, lysate_aspirate_height):
 
         left_pipette.pick_up_tip()
@@ -70,19 +116,7 @@ def run(protocol: protocol_api.ProtocolContext):
 
         left_pipette.drop_tip()
 
-    # exactly 5.2mm is 30ul of lysate in pcr
-    lysate_aspirate_height = 4.5
-
-    dispense_well_list = dispense_well_list
-
-    for well in dispense_well_list:
-        distribute_lysate(well, lysate_aspirate_height)
-        lysate_aspirate_height -= 0.4
-
-
-    ##################################################################################################################
-
-    # Next, Distribute the Energy Solution, water, DNA Mix
+    # Distributing master mix Energy Solution, Buffer A, DNA, chi6, water etc.
     def distribute_substrates(well, substrates_aspirate_height):
 
         left_pipette.pick_up_tip()
@@ -105,48 +139,57 @@ def run(protocol: protocol_api.ProtocolContext):
         left_pipette.drop_tip()
 
 
-    # exactly 5.2mm is 30ul of lysate in pcr
-    substrates_aspirate_height = 9
+    # 2. Running protocol------------------------------------------------------
 
-    dispense_well_list = dispense_well_list
+    # Set temperature of temperature module to 4 degrees. The protocol will pause
+    # until this is reached.
+    temperature_module.set_temperature(4)
 
-    for well in dispense_well_list:
-        distribute_substrates(well, substrates_aspirate_height)
-        substrates_aspirate_height -= 0.8
+    if protocol_dispense_lysate:
 
-    ####################################################################################################
+        # Dispensing lysate into each of the dispense wells in dispense well list
+        for well in dispense_well_list:
 
-    #protocol.pause('Check plate and spin down, before replacing for wax')
+            # Caliing function to distribute lysate
+            distribute_lysate(well, lysate_aspirate_height)
 
-    ########################################################################################################
-
-    # last laydown the wax
-
-    #p300.pick_up_tip()
-
-    #p300.distribute(35,
-    #        eppendorf_1500ul_x24_rack.wells_by_name()['A1'],
-    #        [nunc_384.wells_by_name()[well_name].top(5) for well_name in dispense_well_list],
-    #        new_tip='never',
-    #        touch_tip=True,
-    #        air_gap=20,
-    #        disposal_volume=30,
-    #        )
-
-    #p300.drop_tip()
-
-    ## exactly 5.2mm is 30ul of lysate in pcr
-    #lysate_aspirate_height = 4.5
-
-    #dispense_well_list = dispense_well_list
-
-    #for well in dispense_well_list:
-        #pass
-
-        #distribute_lysate(well, lysate_aspirate_height)
-    #    lysate_aspirate_height -= 0.4
+            # Reducing the aspiration height by lysate_aspirate_height_inc
+            lysate_aspirate_height -= lysate_aspirate_height_inc
 
 
+    if protocol_dispense_subsrates:
 
-    # turn off temp module
+        # Dispensing subsrates master mix into each of the dispense wells in
+        # dispense well list
+        for well in dispense_well_list:
+
+            # Caliing function to distribute substrates
+            distribute_substrates(well, substrates_aspirate_height)
+
+            # Reducing the aspiration height by subsrates_aspirate_height_inc
+            substrates_aspirate_height -= substrates_aspirate_height_inc
+
+    # Pausing protocol so thr plate can be span down in the centrifuge before
+    # adding the wax ontop
+    protocol.pause('Check plate and spin down, before replacing for wax')
+
+    if protocol_dispense_wax:
+
+        # Pick up a 300ul tip
+        right_pipette.pick_up_tip()
+
+        # Distributing 35ul of wax ontop of each well in dispense_well_list
+        right_pipette.distribute(wax_dispense_volume,
+               wax_eppendorf_well,
+               [nunc_384.wells_by_name()[well_name].top(wax_dispense_height) for well_name in dispense_well_list],
+               new_tip=wax_new_tip,
+               touch_tip=wax_touch_tip,
+               air_gap=wax_air_gap,
+               disposal_volume=wax_disposal_volume,
+               )
+
+        # Drops tip
+        right_pipette.drop_tip()
+
+    # Turning off temp module
     temperature_module.deactivate()
