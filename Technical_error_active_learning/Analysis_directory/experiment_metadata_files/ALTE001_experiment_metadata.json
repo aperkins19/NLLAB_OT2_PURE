@@ -1,0 +1,118 @@
+{
+  "move_file": "True",
+  "using_standard_curve": "False",
+  "save_figures": "True",
+  "triplicate": 2,
+  "number_of_chromatics_measured": 3,
+  "metadataheader": 2,
+  "gap": 3,
+
+  "chromatics_designations" :
+  {
+    "635_680_1": "3000",
+    "485_520_2": "800",
+    "485_520_3": "1500"
+  },
+
+  "metadata" :
+  {
+    "Reaction Temperature (°C)": 30,
+    "Performed by":"Alex Perkins",
+    "Instrument":"BMG POLARstar Omega",
+    "Experiment #": 8
+  },
+
+
+  "well_designation" :
+
+  {
+
+  "B12" :
+    {
+    "Reaction Type": "TXTL",
+    "System":"Michael_Lysate_001",
+    "Energy Solution":"Michael_ES_001",
+    "Amplicon DNA Template": "s70_deGFP_MGA",
+    "Replicate": 1
+    },
+
+  "B13" :
+    {
+    "Reaction Type": "TXTL",
+    "System":"Michael_Lysate_001",
+    "Energy Solution":"Michael_ES_001",
+    "Amplicon DNA Template": "s70_deGFP_MGA",
+    "Replicate": 2
+    },
+
+  "B14" :
+    {
+    "Reaction Type": "TXTL",
+    "System":"Michael_Lysate_001",
+    "Energy Solution":"Michael_ES_001",
+    "Amplicon DNA Template": "s70_deGFP_MGA",
+    "Replicate": 3
+    },
+
+  "B15" :
+    {
+    "Reaction Type": "TXTL",
+    "System":"Michael_Lysate_001",
+    "Energy Solution":"Michael_ES_001",
+    "Amplicon DNA Template": "s70_deGFP_MGA",
+    "Replicate": 4
+    },
+  "B16" :
+    {
+    "Reaction Type": "TXTL",
+    "System":"Michael_Lysate_001",
+    "Energy Solution":"Michael_ES_001",
+    "Amplicon DNA Template": "s70_deGFP_MGA",
+    "Replicate": 5
+    },
+  "B17" :
+    {
+    "Reaction Type": "TXTL",
+    "System":"Michael_Lysate_001",
+    "Energy Solution":"Michael_ES_001",
+    "Amplicon DNA Template": "s70_deGFP_MGA",
+    "Replicate": 6
+    },
+  "B18" :
+    {
+    "Reaction Type": "TXTL",
+    "System":"Michael_Lysate_001",
+    "Energy Solution":"Michael_ES_001",
+    "Amplicon DNA Template": "s70_deGFP_MGA",
+    "Replicate": 7
+    },
+  "B19" :
+    {
+    "Reaction Type": "TXTL",
+    "System":"Michael_Lysate_001",
+    "Energy Solution":"Michael_ES_001",
+    "Amplicon DNA Template": "s70_deGFP_MGA",
+    "Replicate": 8
+    },
+  "B20" :
+    {
+    "Reaction Type": "TXTL",
+    "System":"Michael_Lysate_001",
+    "Energy Solution":"Michael_ES_001",
+    "Amplicon DNA Template": "s70_deGFP_MGA",
+    "Replicate": 9
+    },
+  "B21" :
+    {
+    "Reaction Type": "TXTL",
+    "System":"Michael_Lysate_001",
+    "Energy Solution":"Michael_ES_001",
+    "Amplicon DNA Template": "s70_deGFP_MGA",
+    "Replicate": 10
+    }
+
+
+
+  }
+
+}
