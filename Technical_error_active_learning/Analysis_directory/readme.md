@@ -20,15 +20,15 @@ Be sure to stick the url in it's own quotes as below. This enters it as a string
 3. Run your container on port 9998
 
 Windows:
-`docker run -p 9998:8888 -v "%CD%":/src --name technical_error_analysis_docker_container technical_error_analysis_docker_image`
+`docker run -p 9998:8888 -v "%CD%":/app --name technical_error_analysis_docker_container technical_error_analysis_docker_image`
 
 If you're on Mac or Linux:
 
-`docker run -p 8888:8888 -v "%PWD":/src --name technical_error_analysis_docker_container technical_error_analysis_docker_image`
+`docker run -p 8888:8888 -v "%PWD":/app --name technical_error_analysis_docker_container technical_error_analysis_docker_image`
 
 The way it works is by:
 a. starting a Docker Container
-b. Mounting your current directory ("%CD%") to a directory in the container ("/src") so that files can be shared and moved in and out.
+b. Mounting your current directory ("%CD%") to a directory in the container ("/app") so that files can be shared and moved in and out.
 c. starting a Jupyter server.
 
 4. If it has started correctly, you'll get a url token. Copy the token provided into your brower URL
