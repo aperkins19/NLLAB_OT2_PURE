@@ -3,7 +3,7 @@
   "using_standard_curve": "False",
   "save_figures": "True",
   "triplicate": 2,
-  "number_of_chromatics_measured": 2,
+  "number_of_chromatics_measured": 4,
   "metadataheader": 2,
   "gap": 3,
 
@@ -23,7 +23,7 @@
     "Instrument":"BMG POLARstar Omega",
     "Experiment #": 2,
 
-a
+
     "lysate_aspirate_height_init": 4.5,
     "lysate_aspirate_height_inc": 0.4,
     "substrates_aspirate_height_init": 9,
@@ -43,7 +43,7 @@ a
 
   {
 
-  "C3" :
+  "C03" :
     {
     "Reaction Type": "TXTL",
     "System":"Michael_Lysate_001",
@@ -52,7 +52,7 @@ a
     "Replicate": 1
     },
 
-  "C5" :
+  "C05" :
     {
     "Reaction Type": "TXTL",
     "System":"Michael_Lysate_001",
@@ -61,7 +61,7 @@ a
     "Replicate": 2
     },
 
-  "C7" :
+  "C07" :
     {
     "Reaction Type": "TXTL",
     "System":"Michael_Lysate_001",
@@ -70,7 +70,7 @@ a
     "Replicate": 3
     },
 
-  "C9" :
+  "C09" :
     {
     "Reaction Type": "TXTL",
     "System":"Michael_Lysate_001",
