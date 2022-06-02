@@ -11,24 +11,33 @@ You can get the path by 'Copy address as text' in the URL of your file manager.
 Be sure to stick the url in it's own quotes as below. This enters it as a string and will allow CMD to read any spaces in the path correctly.
 
 
-`cd "C://mypath/directory/my project/subfolder"`
+```bash
+cd "C://mypath/directory/my project/subfolder"
+```
 
 2. Build the docker image
 
-`docker build -t technical_error_analysis_docker_image .`
+```bash
+docker build -t technical_error_analysis_docker_image .
+```
 
 3. Run your container on port 9998
 
 Windows:
-`docker run -p 9998:8888 -v "%CD%":/app --name technical_error_analysis_docker_container technical_error_analysis_docker_image`
+```bash
+docker run -p 9998:8888 -v "%CD%":/app --name technical_error_analysis_docker_container technical_error_analysis_docker_image
+```
 
 If you're on Mac or Linux:
 
-`docker run -p 8888:8888 -v "%PWD":/app --name technical_error_analysis_docker_container technical_error_analysis_docker_image`
+```bash
+docker run -p 8888:8888 -v "%PWD":/app --name technical_error_analysis_docker_container technical_error_analysis_docker_image
+```
 
 The way it works is by:
 a. starting a Docker Container
-b. Mounting your current directory ("%CD%") to a directory in the container ("/app") so that files can be shared and moved in and out.
+b. Mounting your current directory ("%CD%") to 
+a directory in the container ("/app") so that files can be shared and moved in and out.
 c. starting a Jupyter server.
 
 4. If it has started correctly, you'll get a url token. Copy the token provided into your brower URL
