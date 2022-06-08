@@ -85,10 +85,10 @@ def run(protocol: protocol_api.ProtocolContext):
     wax_disposal_volume = 30
 
     # Defining the wells to dispense into
-    ms_dispense_well_list = ['C3','C5','C7','C9','C11','C13','C15','C17','C19','C21']
+    ms_dispense_well_list = ['J3','J5','J7','J9','J11','J13','J15','J17','J19','J21']
 
-    # Defining the wells to dispense into
-    ap_dispense_well_list = ['G3','G5','G7','G9','G11','G13','G15','G17','G19','G21']
+    # # Defining the wells to dispense into
+    # ap_dispense_well_list = ['G3','G5','G7','G9','G11','G13','G15','G17','G19','G21']
 
 
     protocol_dispense_lysate = True
@@ -159,18 +159,18 @@ def run(protocol: protocol_api.ProtocolContext):
             lysate_aspirate_height -= lysate_aspirate_height_inc
 
 
-        ## AP
-
-        lysate_aspirate_height = lysate_aspirate_height_init
-
-        # Dispensing lysate into each of the dispense wells in dispense well list
-        for well in ap_dispense_well_list:
-
-            # Caliing function to distribute lysate
-            distribute_lysate(well, pcr_temp_plate['A2'], lysate_aspirate_height)
-
-            # Reducing the aspiration height by lysate_aspirate_height_inc
-            lysate_aspirate_height -= lysate_aspirate_height_inc
+        # ## AP
+        #
+        # lysate_aspirate_height = lysate_aspirate_height_init
+        #
+        # # Dispensing lysate into each of the dispense wells in dispense well list
+        # for well in ap_dispense_well_list:
+        #
+        #     # Caliing function to distribute lysate
+        #     distribute_lysate(well, pcr_temp_plate['A2'], lysate_aspirate_height)
+        #
+        #     # Reducing the aspiration height by lysate_aspirate_height_inc
+        #     lysate_aspirate_height -= lysate_aspirate_height_inc
 
 
 
@@ -194,16 +194,16 @@ def run(protocol: protocol_api.ProtocolContext):
 
         ### AP
 
-        substrates_aspirate_height = substrates_aspirate_height_init
-
-        # dispense well list
-        for well in ap_dispense_well_list:
-
-            # Caliing function to distribute substrates
-            distribute_substrates(well, pcr_temp_plate['B2'], substrates_aspirate_height)
-
-            # Reducing the aspiration height by subsrates_aspirate_height_inc
-            substrates_aspirate_height -= substrates_aspirate_height_inc
+        # substrates_aspirate_height = substrates_aspirate_height_init
+        #
+        # # dispense well list
+        # for well in ap_dispense_well_list:
+        #
+        #     # Caliing function to distribute substrates
+        #     distribute_substrates(well, pcr_temp_plate['B2'], substrates_aspirate_height)
+        #
+        #     # Reducing the aspiration height by subsrates_aspirate_height_inc
+        #     substrates_aspirate_height -= substrates_aspirate_height_inc
 
     # Pausing protocol so thr plate can be span down in the centrifuge before
     # adding the wax ontop
@@ -227,21 +227,21 @@ def run(protocol: protocol_api.ProtocolContext):
         # Drops tip
         right_pipette.drop_tip()
 
-        # Pick up a 300ul tip
-        right_pipette.pick_up_tip()
-
-        # Distributing 35ul of wax ontop of each well in dispense_well_list
-        right_pipette.distribute(wax_dispense_volume,
-               wax_eppendorf_well,
-               [nunc_384.wells_by_name()[well_name].top(wax_dispense_height) for well_name in ap_dispense_well_list],
-               new_tip=wax_new_tip,
-               touch_tip=wax_touch_tip,
-               air_gap=wax_air_gap,
-               disposal_volume=wax_disposal_volume,
-               )
-
-        # Drops tip
-        right_pipette.drop_tip()
+        # # Pick up a 300ul tip
+        # right_pipette.pick_up_tip()
+        #
+        # # Distributing 35ul of wax ontop of each well in dispense_well_list
+        # right_pipette.distribute(wax_dispense_volume,
+        #        wax_eppendorf_well,
+        #        [nunc_384.wells_by_name()[well_name].top(wax_dispense_height) for well_name in ap_dispense_well_list],
+        #        new_tip=wax_new_tip,
+        #        touch_tip=wax_touch_tip,
+        #        air_gap=wax_air_gap,
+        #        disposal_volume=wax_disposal_volume,
+        #        )
+        #
+        # # Drops tip
+        # right_pipette.drop_tip()
 
     # Turning off temp module
     temperature_module.deactivate()

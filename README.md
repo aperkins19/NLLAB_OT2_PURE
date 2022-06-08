@@ -4,9 +4,19 @@
 # Project Planning & Management
 
 
-## 25th May
 
-## 30th May
+## 07/06/2022
+
+### Run by MS
+
+* Ran 10 replicates of pbest DNA on opentron with MS lysate 1 and MS Energy Solution 001.
+* 2 replicates (towards the end) never got any master mix - need to increase the substrate aspiration height increment
+* Made a mistake and put well plate back on opentron in wrong place after spinning so did wax step myself.
+* Only measuring GFP for 12 hours.
+
+
+
+## 30/05/2022
 
 * Changed robot level and recalibrated. Offset seems to be reduced but still occurs. Have discovered that you can, in fact, run a 'Labware Offset Check' when setting up the deck to run a protocol.
 This allows you to tell robot exactly where the bits of labware are and seems to correct the offset. See pipette_offset_data.png in this directory for correction data. This appears to have fixed the problem.
