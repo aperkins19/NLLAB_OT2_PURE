@@ -18,6 +18,8 @@ Changed preprocessing scripts to:
 * cope better with different types of time lists.
 * rearrange the header metadata in "_raw.csv" so we don't have to do it manually
 * fixed the processing of ALTE004 and produced the plots.
+* Had a go trying to go get black to work. https://atom.io/packages/atom-black
+
 #### Question for Michael - have you updated the energy solution height increment post ALTE004?  LMK
 
 ## 30/05/2022
