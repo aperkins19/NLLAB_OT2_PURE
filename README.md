@@ -3,6 +3,7 @@
 
 # Project Planning & Management
 
+# Question for Michael - have you updated the energy solution height increment post ALTE004?  LMK
 
 
 ## 07/06/2022
@@ -14,6 +15,11 @@
 * Made a mistake and put well plate back on opentron in wrong place after spinning so did wax step myself.
 * Only measuring GFP for 12 hours.
 
+## Bug fixes by AP
+Changed preprocessing scripts to:
+* cope better with different types of time lists.
+* rearrange the header metadata in "_raw.csv" so we don't have to do it manually
+* fixed the processing of ALTE004 and produced the plots.
 
 
 ## 30/05/2022
@@ -29,20 +35,18 @@ This allows you to tell robot exactly where the bits of labware are and seems to
 
 * Put all pipetting parameters into a dictionary
 
-* Code wax pipette step and fix pipette
-  * OT2 parts.
-    * Insert sink plugs into 3D printed tube rack with Mirren.
-    * Confirm dimensions + build quality
-    * Order rest of parts from U create.
+* Install Black
 
 * Get the Opentron to make a master mix of energy solution, dna, (malachite green),
 chi6, buffer, water. This could be a separate script, *or a modular function that can simply be called upstream of the plating functions*. AP
 
 * Design the technical error optimiser - once we have our 1st 10x cfps replicated. let's sit down with pen, paper and coffee and design the algorithm + software plan next week. AP
 
-* Install Black
-
-* create /app in linux of docker
+* Code wax pipette step and fix pipette
+  * OT2 parts.
+    * Insert sink plugs into 3D printed tube rack with Mirren.
+    * Confirm dimensions + build quality
+    * Order rest of parts from U create.
 
 ## To do - Far term
 
@@ -53,7 +57,6 @@ is off when picking up a tip even after calibrating.)
   * Alex has brought in his spirit level - use this to ensure the OT2 is level by adjusting feet.
   * Need to do a factory reset
 
-
 * Run successive rounds of technical error reduction active learning.
 
 * Design 3D printed PCR tube rack
@@ -61,7 +64,8 @@ is off when picking up a tip even after calibrating.)
 
 ### Completed
 
-* ~Set up first lysate reaction with OT2 ~
+* ~create /app in linux of docker~
+* ~Set up first lysate reaction with OT2~
 * ~Set up temperature module~
 * ~Characterise handling lysate. Create a script to try different parameters
 and see the technical error. **We tried doing this by weighing pcr tubes before
