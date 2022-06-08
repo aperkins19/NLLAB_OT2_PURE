@@ -3,8 +3,6 @@
 
 # Project Planning & Management
 
-# Question for Michael - have you updated the energy solution height increment post ALTE004?  LMK
-
 
 ## 07/06/2022
 
@@ -20,7 +18,7 @@ Changed preprocessing scripts to:
 * cope better with different types of time lists.
 * rearrange the header metadata in "_raw.csv" so we don't have to do it manually
 * fixed the processing of ALTE004 and produced the plots.
-
+#### Question for Michael - have you updated the energy solution height increment post ALTE004?  LMK
 
 ## 30/05/2022
 
