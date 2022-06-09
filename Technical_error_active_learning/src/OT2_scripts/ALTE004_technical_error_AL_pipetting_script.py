@@ -5,7 +5,7 @@ metadata = {
     'protocolName': 'Lysate CFPS Plating Script v1',
     'author': 'Alex Perkins',
     'email': 'a.j.p.perkins@sms.ed.ac.uk',
-    'description': 'First draft of script to plate out 10x lysate reactions',
+    'description': 'First draft of script to plate out 10x lysate reactions', 
     'apiLevel': '2.3'
 }
 
