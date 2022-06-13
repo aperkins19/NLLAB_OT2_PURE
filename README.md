@@ -3,6 +3,11 @@
 
 # Project Planning & Management
 
+## 12th of June 2022
+
+* Alex wrote and pushed Data script #3. The script compiles the tidy data sets together and output some plots.
+
+* Trialled a place holder script src/active_learning/GP_test.ipynb that messes around with GPS but we can delete it and start again later.
 
 ## 07/06/2022
 

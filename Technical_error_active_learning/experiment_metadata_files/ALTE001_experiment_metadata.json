@@ -21,9 +21,9 @@
     "Experiment #": 1,
 
 
-    "lysate_aspirate_height": 4.5,
+    "lysate_aspirate_height_init": 4.5,
     "lysate_aspirate_height_inc": 0.4,
-    "substrates_aspirate_height": 9,
+    "substrates_aspirate_height_init": 9,
     "substrates_aspirate_height_inc": 0.4,
     "wax_dispense_volume": 35,
     "wax_dispense_height": 5,
