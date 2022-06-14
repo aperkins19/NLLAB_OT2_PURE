@@ -95,16 +95,16 @@ def run(protocol: protocol_api.ProtocolContext):
 
     # Defining the wells to dispense into
     ms_dispense_well_list = [
-        "J3",
-        "J5",
-        "J7",
-        "J9",
-        "J11",
-        "J13",
-        "J15",
-        "J17",
-        "J19",
-        "J21",
+        "M3",
+        "M5",
+        "M7",
+        "M9",
+        "M11",
+        "M13",
+        "M15",
+        "M17",
+        "M19",
+        "M21",
     ]
 
     # # Defining the wells to dispense into
