@@ -3,6 +3,19 @@
 
 # Project Planning & Management
 
+
+## 15/06/2022
+
+* Re ran ALTE005 as no signal was observed in any of the replicates. Something could have been left out the substrate master mix.
+* MS observed Opentron pipetting and replicate 1 and 7 did not receive any substrate master mix. Need to adjust the aspiration height down. 
+
+## 14/06/2022
+
+* Alex ran ALTE005 overnight. OT2 script and metadata file updated and pushed
+* The run seemed to run okay - maybe the M21 didn't get as much substrate mix? but hard to say.
+* we should add robot lights flashing and a "please spin down the plate before replacing in.. ^ insert deck slot^^  flash message"
+* maybe not all getting same vol of wax due to headspace?
+
 ## 12th of June 2022
 
 * Alex wrote and pushed Data script #3. The script compiles the tidy data sets together and output some plots.
