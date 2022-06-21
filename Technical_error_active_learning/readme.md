@@ -36,7 +36,7 @@ docker run -p 8888:8888 -v "%PWD":/app --name technical_error_analysis_docker_co
 
 The way it works is by:
 a. starting a Docker Container
-b. Mounting your current directory ("%CD%") to 
+b. Mounting your current directory ("%CD%") to
 a directory in the container ("/app") so that files can be shared and moved in and out.
 c. starting a Jupyter server.
 
@@ -68,3 +68,17 @@ On the same plate as ATLE003.
 
 Same as ALTE002 but using Alex's lysate and ES as a positive control.
 Will segregate the raw data files manually.
+
+
+## Combined run
+
+The pipetting script was improved to make it more dynamic and allow multiple experiments on one plate.
+
+
+### ALTE006
+
+As we had a load of trouble with ALTE005, having had to do multiple runs and seeing no signal -  To rule out MS lysate and substrates being a bit crap, we're doing a complete re-run but with AP lysate and substrates.
+
+### ALTE007
+
+We're also trialling sticking the substrates in first before the viscous lysate and seeing if that makes a difference. -  Used MS substrates
