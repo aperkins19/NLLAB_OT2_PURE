@@ -74,6 +74,7 @@ Will segregate the raw data files manually.
 
 The pipetting script was improved to make it more dynamic and allow multiple experiments on one plate.
 
+** Wax new tip should not be Never to avaoid cross contamination **
 
 ### ALTE006
 
