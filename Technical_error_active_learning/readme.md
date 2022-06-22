@@ -48,6 +48,40 @@ It should look like this:
 
 It should open up a Jupyter File explorer in the directory in your browser.
 
+# Connecting to OT2 through ssh
+
+## Generating key pair
+```bash
+ssh-keygen
+```
+
+## Sending public key to raspberry pi
+
+### Command template - This needs to be ran in Powershell
+@{key = Get-Content [ssh key file path] | Out-String} | ConvertTo-Json | Invoke-WebRequest -Method Post -ContentType 'application/json' -Uri [OT2 ip]:31950/server/ssh_keys -UseBasicParsing
+
+```bash
+@{key = Get-Content C:\users\s1530400\.ssh\id_rsa | Out-String} | ConvertTo-Json | Invoke-WebRequest -Method Post -ContentType 'application/json' -Uri 169.254.156.218:31950/server/ssh_keys -UseBasicParsing
+```
+
+## Transferring a file over
+
+### Note!!!
+Can't transfer files from M:\ datastore folder path for some reason. Transfer files from C:\.
+
+### Command template
+scp -i [ssh key file path] [file_path_from_local] root@[OT2 IP (may change - find in OT2 UI)]:[file_path_on_ot2]
+
+```bash
+scp -i C:\users\s1530400\.ssh\id_rsa C:\users\s1530400\NLLAB_OT2_Protocol_Dev\Technical_error_active_learning\src\OT2_scripts\OT2_settings\test.json root@169.254.156.218:/data/user_storage/al_cell_free
+```
+
+## Connecting to the OT2 raspberry pi
+ssh root@[OT2 IP]
+
+```bash
+ssh root@169.254.156.218
+```
 
 # Experiment Diary
 
