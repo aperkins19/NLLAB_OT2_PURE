@@ -4,10 +4,26 @@
 # Project Planning & Management
 
 
+## 23/06/2022
+
+* Managed to ssh into the opentron raspberry pi and copy files across
+* Managed to read in a json file into a protocol and print it out as a comment
+* Created three json settings files - experiment, labware and pipetting json settings files.
+  Now the protocol script will read in these files rather than having hardcoded values.
+* The new process will be to have a folder (e.g. ALTE007) that has the protocol .py
+  file along with the json settings files. This can then be copied across to the
+  raspberry pi and then the protocol can be either ran from the command line or the
+  ui can be used. All the file paths in the protocol .py file are absolute paths
+  so it doesn't matter where the protocol .py file is executed.
+* Also found a bug when executing the protocol from the command line. We get the following error
+  **/data/robot_settings.json not found. Loading defaults**.
+  Maybe this is why we always need to do the pipette offset every time we run
+  as it keeps reverting to the default?
+
 ## 15/06/2022
 
 * Re ran ALTE005 as no signal was observed in any of the replicates. Something could have been left out the substrate master mix.
-* MS observed Opentron pipetting and replicate 1 and 7 did not receive any substrate master mix. Need to adjust the aspiration height down. 
+* MS observed Opentron pipetting and replicate 1 and 7 did not receive any substrate master mix. Need to adjust the aspiration height down.
 
 ## 14/06/2022
 

@@ -76,11 +76,27 @@ scp -i [ssh key file path] [file_path_from_local] root@[OT2 IP (may change - fin
 scp -i C:\users\s1530400\.ssh\id_rsa C:\users\s1530400\NLLAB_OT2_Protocol_Dev\Technical_error_active_learning\src\OT2_scripts\OT2_settings\test.json root@169.254.156.218:/data/user_storage/al_cell_free
 ```
 
+## Transferring a folder over
+
+### Command template
+scp -r -i [ssh key file path] [file_path_from_local] root@[OT2 IP (may change - find in OT2 UI)]:[file_path_on_ot2]
+
+### This example transfers a whole folder called ALTE007 which contains the protocol .py file, the experiment settings json file,
+### the labware settings json file and the pipetting settings json files
+```bash
+scp -r -i C:\users\s1109309\.ssh\id_rsa C:\users\s1109309\NLLAB_OT2_Protocol_Dev\Technical_error_active_learning\src\OT2_scripts\ALTE007\ root@169.254.182.204:/data/user_storage/
+```
+
 ## Connecting to the OT2 raspberry pi
 ssh root@[OT2 IP]
 
 ```bash
 ssh root@169.254.156.218
+```
+
+## Running the protocol from the command line (on raspberry pi)
+```bash
+opentrons_execute ALTE007_technical_error_AL_pipetting_script.py
 ```
 
 # Experiment Diary
