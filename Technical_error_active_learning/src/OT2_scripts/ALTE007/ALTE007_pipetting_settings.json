@@ -1,0 +1,22 @@
+{
+  "lysate_aspirate_height_init" : 4.5,
+
+  "lysate_aspirate_height_inc" : 0.4,
+
+  "substrates_aspirate_height_init" : 8.6,
+
+  "substrates_aspirate_height_inc" : 0.6,
+
+  "wax_dispense_volume" : 35,
+
+  "wax_dispense_height" : -3,
+
+  "wax_new_tip" : "never",
+
+  "wax_touch_tip" : 0,
+
+  "wax_air_gap" : 20,
+
+  "wax_disposal_volume" : 30
+
+}
