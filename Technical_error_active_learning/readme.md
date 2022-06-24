@@ -88,10 +88,10 @@ scp -r -i C:\users\s1109309\.ssh\id_rsa C:\users\s1109309\NLLAB_OT2_Protocol_Dev
 ```
 
 ## Connecting to the OT2 raspberry pi
-ssh root@[OT2 IP]
+ssh -i ot2_ssh_key root@[OT2 IP]
 
 ```bash
-ssh root@169.254.156.218
+ssh -i ot2_ssh_key root@169.254.156.218
 ```
 
 ## Running the protocol from the command line (on raspberry pi)
