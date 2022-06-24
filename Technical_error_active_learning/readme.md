@@ -84,7 +84,7 @@ scp -r -i [ssh key file path] [file_path_from_local] root@[OT2 IP (may change - 
 ### This example transfers a whole folder called ALTE007 which contains the protocol .py file, the experiment settings json file,
 ### the labware settings json file and the pipetting settings json files
 ```bash
-scp -r -i C:\users\s1109309\.ssh\id_rsa C:\users\s1109309\NLLAB_OT2_Protocol_Dev\Technical_error_active_learning\src\OT2_scripts\ALTE007\ root@169.254.182.204:/data/user_storage/
+scp -r -i ot2_ssh_key C:\users\nllab_ot2\NLLAB_OT2_Protocol_Dev\Technical_error_active_learning\src\OT2_scripts\ALTE007\ root@169.254.182.204:/data/user_storage/
 ```
 
 ## Connecting to the OT2 raspberry pi
