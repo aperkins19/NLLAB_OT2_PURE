@@ -2,6 +2,11 @@
 
 Instructions for deploying the analysis environment and descriptions of the code and workflows within.
 
+##### Bugs /  Opentrons Feedback
+* Offset calibrations file can't be found
+* Could they sell a bolt on self calibrator for those who need more consistant work?
+
+
 
 # Usage
 
@@ -84,14 +89,14 @@ scp -r -i [ssh key file path] [file_path_from_local] root@[OT2 IP (may change - 
 ### This example transfers a whole folder called ALTE007 which contains the protocol .py file, the experiment settings json file,
 ### the labware settings json file and the pipetting settings json files
 ```bash
-scp -r -i ot2_ssh_key C:\users\nllab_ot2\NLLAB_OT2_Protocol_Dev\Technical_error_active_learning\src\OT2_scripts\ALTE007\ root@169.254.182.204:/data/user_storage/
+scp -r -i C:\users\nllab_ot2\.ssh\ot2_ssh_key C:\users\nllab_ot2\NLLAB_OT2_Protocol_Dev\Technical_error_active_learning\src\OT2_scripts\ALTE007\ root@169.254.156.218:/data/user_storage/
 ```
 
 ## Connecting to the OT2 raspberry pi
 ssh -i ot2_ssh_key root@[OT2 IP]
 
 ```bash
-ssh -i ot2_ssh_key root@169.254.156.218
+ssh -i C:\Users\nllab_ot2\.ssh\ot2_ssh_key root@169.254.156.218
 ```
 
 ## Running the protocol from the command line (on raspberry pi)
@@ -133,3 +138,9 @@ As we had a load of trouble with ALTE005, having had to do multiple runs and see
 ### ALTE007
 
 We're also trialling sticking the substrates in first before the viscous lysate and seeing if that makes a difference. -  Used MS substrates
+
+* Saw one of the end of the substrates not pick enough up. Maybe the asp_increment isn't keeping up towards the end. Decrease by 0.1 for ALTE008
+
+* turn off temp module at spin down wax pause.
+
+* Change wax step to always get new tip
