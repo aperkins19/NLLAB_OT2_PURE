@@ -13,8 +13,6 @@ metadata = {
 # Add 35ul of lysate to a PCR tube to A1 in cold block
 # Defining the aspiration height for 35ul of lysate  "lysate_aspirate_height_init" : 4.5,
 
-
-
 # Add 90ul of substrates mix to B1
 # Defining the aspiration height for 90ul of substrates: "substrates_aspirate_height_init" : 8.6,
 
@@ -33,24 +31,30 @@ def run(protocol: protocol_api.ProtocolContext):
 
     # Reading in json json_settings_file
     experiment_settings_dict = json.load(open(experiment_settings_dict_path, 'r'))
-    protocol.comment("experiments settings was read in")
+    protocol.comment("Experiment settings json file was read in")
 
     labware_settings_dict = json.load(open(labware_settings_dict_path, 'r'))
-    protocol.comment("labware settings was read in")
+    protocol.comment("Labware settings json file was read in")
 
     pipetting_settings_dict = json.load(open(pipetting_settings_dict_path, 'r'))
-    protocol.comment("pipetting settings was read in")
-
-    protocol.comment(experiment_settings_dict["exp1"]["lysate_source_well"])
-    protocol.comment(labware_settings_dict["temp_module_name"])
-    protocol.comment(str(pipetting_settings_dict["lysate_aspirate_height_init"]))
+    protocol.comment("Pipetting settings json file was read in")
 
     # 1. Defining variables used in protocol-----------------------------------
+
+    # Defining the booleans for the protocol. This controls which parts of
+    # the protocol to run.
+    protocol_dispense_lysate = True
+    protocol_dispense_substrates = True
+    protocol_dispense_wax = True
 
     # labware
 
     # Defining the temperature module
+    protocol.comment(labware_settings_dict["temp_module_name"])
+    protocol.comment(labware_settings_dict["temp_module_pos"])
     temperature_module = protocol.load_module(labware_settings_dict["temp_module_name"], labware_settings_dict["temp_module_pos"])
+
+    protocol.pause("Stop")
 
     # Defining the pcr plate ontop of the temperature module
     pcr_temp_plate = temperature_module.load_labware(
@@ -81,28 +85,6 @@ def run(protocol: protocol_api.ProtocolContext):
         labware_settings_dict["right_pipette_name"], "right", tip_racks=[tiprack_300ul]
     )
 
-    # Defining the eppendorf well where the wax is placed
-    wax_source_well = eppendorf_1500ul_x24_rack.wells_by_name()["A1"]
-
-    # defining where the regents are sourced from.
-    MS_lysate_source_well = pcr_temp_plate["A1"]
-    MS_substrates_source_well = pcr_temp_plate["B1"]
-
-    AP_lysate_source_well = pcr_temp_plate["A2"]
-    AP_substrates_source_well = pcr_temp_plate["B2"]
-
-
-
-
-
-
-    # # Defining the wells to dispense into
-    # AP_dispense_well_list = ['G3','G5','G7','G9','G11','G13','G15','G17','G19','G21']
-
-    protocol_dispense_lysate = True
-    protocol_dispense_subsrates = True
-    protocol_dispense_wax = True
-
     # 2. Defining functions used in this protocol------------------------------
 
     # Distributing lysate
@@ -111,16 +93,16 @@ def run(protocol: protocol_api.ProtocolContext):
         left_pipette.pick_up_tip()
 
         left_pipette.well_bottom_clearance.aspirate = lysate_aspirate_height
-        left_pipette.well_bottom_clearance.dispense = 0.1
+        left_pipette.well_bottom_clearance.dispense = pipetting_settings_dict["lysate_dispense_well_bottom_clearance"]
 
         # aspirate step
-        left_pipette.aspirate(3, source_well, rate=0.2)
+        left_pipette.aspirate(pipetting_settings_dict["lysate_aspirate_volume"], source_well, rate=pipetting_settings_dict["lysate_aspirate_rate"])
         left_pipette.move_to(source_well.top(-2))
         protocol.delay(seconds=2)
         left_pipette.touch_tip()
 
         # Dispense Step
-        left_pipette.dispense(2.5, nunc_384[well], rate=0.1)
+        left_pipette.dispense(pipetting_settings_dict["lysate_dispense_volume"], nunc_384[well], rate=pipetting_settings_dict["lysate_dispense_rate"])
         left_pipette.touch_tip()
 
         left_pipette.drop_tip()
@@ -131,15 +113,15 @@ def run(protocol: protocol_api.ProtocolContext):
         left_pipette.pick_up_tip()
 
         left_pipette.well_bottom_clearance.aspirate = substrates_aspirate_height
-        left_pipette.well_bottom_clearance.dispense = 0.2
+        left_pipette.well_bottom_clearance.dispense = pipetting_settings_dict["substrates_dispense_well_bottom_clearance"]
 
         # aspirate step
-        left_pipette.aspirate(8, source_well, rate=1)
+        left_pipette.aspirate(pipetting_settings_dict["substrates_aspirate_volume"], source_well, rate=pipetting_settings_dict["substrates_aspirate_rate"])
         left_pipette.move_to(source_well.top(-2))
         left_pipette.touch_tip()
 
         # Dispense Step
-        left_pipette.dispense(7.5, nunc_384[well], rate=1)
+        left_pipette.dispense(pipetting_settings_dict["substrates_dispense_volume"], nunc_384[well], rate=pipetting_settings_dict["substrates_dispense_rate"])
 
         left_pipette.drop_tip()
 
@@ -175,23 +157,29 @@ def run(protocol: protocol_api.ProtocolContext):
     # until this is reached.
     temperature_module.set_temperature(4)
 
+    # Extracting the different experiments from the experiments
+    # settings file
+    experiment_ids = experiment_settings_dict.keys()
 
-    ## First Set of Experiments
 
-    ############################################################## AP -  lysate and then substrates
 
+
+    # Running the lysate dispense step if protocol_dispense_lysate = True
     if protocol_dispense_lysate:
 
-        # Lysate then Substrates - AP
-        ###
-        # assigning the dispense well list for this run
-        dispense_well_list = AP_dispense_well_list
-        lysate_source_well = AP_lysate_source_well
+        # Outputting the name of the experiment that is being ran
+        protocol.comment("Running lysate for experiment " + "exp1")
 
-        # init aspirating params
+        # Defining the source wells for the different components in this experiment
+        lysate_source_well = pcr_temp_plate[experiment_settings_dict["exp1"]["lysate_source_well"]]
+
+        # Defining a list of wells for dispensing
+        dispense_well_list = experiment_settings_dict["exp1"]["dispense_well_list"]
+
+        # Defining the initial lysate aspiration height
         lysate_aspirate_height = pipetting_settings_dict["lysate_aspirate_height_init"]
 
-        # Dispensing lysate into each of the dispense wells in dispense well list
+        # Dispensing lysate into each of the wells in dispense well list
         for well in dispense_well_list:
 
             # Caliing function to distribute lysate
@@ -200,17 +188,21 @@ def run(protocol: protocol_api.ProtocolContext):
             # Reducing the aspiration height by lysate_aspirate_height_inc
             lysate_aspirate_height -= pipetting_settings_dict["lysate_aspirate_height_inc"]
 
+        protocol.comment("Lysate dispense step complete for experiment " + "exp1")
 
-    if protocol_dispense_subsrates:
-        # Dispensing subsrates master mix into each of the dispense wells in
+    # Running the substrate dispense step if protocol_dispense_substrates = True
+    if protocol_dispense_substrates:
 
-        # assigning the dispense well list for this run
-        dispense_well_list = AP_dispense_well_list
-        substrates_source_well = AP_substrates_source_well
+        # Defining the source well for the substrates master mix
+        substrates_source_well = pcr_temp_plate[experiment_settings_dict["exp2"]["substrates_source_well"]]
 
+        # Defining a list of wells for dispensing
+        dispense_well_list = experiment_settings_dict["exp2"]["dispense_well_list"]
+
+        # Defining the initial lysate aspiration height
         substrates_aspirate_height = pipetting_settings_dict["substrates_aspirate_height_init"]
 
-        # dispense well list
+        # Dispensing substrates into each of the wells in dispense well list
         for well in dispense_well_list:
 
             # Caliing function to distribute substrates
@@ -222,20 +214,23 @@ def run(protocol: protocol_api.ProtocolContext):
             substrates_aspirate_height -= pipetting_settings_dict["substrates_aspirate_height_inc"]
 
 
+        protocol.comment("Substrate dispense step complete for experiment " + "exp2")
 
 
-    ############################################################## MS -  Substrates and then lysate
 
-    if protocol_dispense_subsrates:
-        # Dispensing subsrates master mix into each of the dispense wells in
+    # Running the substrate dispense step if protocol_dispense_substrates = True
+    if protocol_dispense_substrates:
 
-        # assigning the dispense well list for this run
-        dispense_well_list = MS_dispense_well_list
-        substrates_source_well = MS_substrates_source_well
+        # Defining the source well for the substrates master mix
+        substrates_source_well = pcr_temp_plate[experiment_settings_dict["exp1"]["substrates_source_well"]]
 
+        # Defining a list of wells for dispensing
+        dispense_well_list = experiment_settings_dict["exp1"]["dispense_well_list"]
+
+        # Defining the initial lysate aspiration height
         substrates_aspirate_height = pipetting_settings_dict["substrates_aspirate_height_init"]
 
-        # dispense well list
+        # Dispensing substrates into each of the wells in dispense well list
         for well in dispense_well_list:
 
             # Caliing function to distribute substrates
@@ -247,17 +242,25 @@ def run(protocol: protocol_api.ProtocolContext):
             substrates_aspirate_height -= pipetting_settings_dict["substrates_aspirate_height_inc"]
 
 
+        protocol.comment("Substrate dispense step complete for experiment " + "exp1")
+
+
+    # Running the lysate dispense step if protocol_dispense_lysate = True
     if protocol_dispense_lysate:
 
-        ###
-        # assigning the dispense well list for this run
-        dispense_well_list = MS_dispense_well_list
-        lysate_source_well = MS_lysate_source_well
+        # Outputting the name of the experiment that is being ran
+        protocol.comment("Running lysate for experiment " + "exp2")
 
-        # init aspirating params
+        # Defining the source wells for the different components in this experiment
+        lysate_source_well = pcr_temp_plate[experiment_settings_dict["exp2"]["lysate_source_well"]]
+
+        # Defining a list of wells for dispensing
+        dispense_well_list = experiment_settings_dict["exp2"]["dispense_well_list"]
+
+        # Defining the initial lysate aspiration height
         lysate_aspirate_height = pipetting_settings_dict["lysate_aspirate_height_init"]
 
-        # Dispensing lysate into each of the dispense wells in dispense well list
+        # Dispensing lysate into each of the wells in dispense well list
         for well in dispense_well_list:
 
             # Caliing function to distribute lysate
@@ -266,26 +269,32 @@ def run(protocol: protocol_api.ProtocolContext):
             # Reducing the aspiration height by lysate_aspirate_height_inc
             lysate_aspirate_height -= pipetting_settings_dict["lysate_aspirate_height_inc"]
 
+        protocol.comment("Lysate dispense step complete for experiment " + "exp2")
 
 
-    ##########################################################################################################################################
 
-    # wax
 
-    #########################################################################################################################################
 
-    # Pausing protocol so thr plate can be span down in the centrifuge before
+    # Pausing protocol so the plate can be span down in the centrifuge before
     # adding the wax ontop
     protocol.pause("Check plate and spin down, before replacing for wax")
 
 
+    # Running the wax dispense step if protocol_dispense_wax = True
     if protocol_dispense_wax:
 
-        dispense_wax_to_individual_replicate_set(AP_dispense_well_list)
+        # Looping through the different experiments
+        for experiment_id in experiment_ids:
 
-        dispense_wax_to_individual_replicate_set(MS_dispense_well_list)
+            # Defining a list of wells for dispensing
+            dispense_well_list = experiment_settings_dict[experiment_id]["dispense_well_list"]
 
+            # Defining the source well for the wax
+            wax_source_well = eppendorf_1500ul_x24_rack.wells_by_name()[experiment_settings_dict[experiment_id]["wax_source_well"]]
 
+            dispense_wax_to_individual_replicate_set(dispense_well_list)
 
-    # Turning off temp module
+            protocol.comment("Wax dispense step complete for experiment " + experiment_id)
+
+    # Turning off temp module after all experiments have finished
     temperature_module.deactivate()
