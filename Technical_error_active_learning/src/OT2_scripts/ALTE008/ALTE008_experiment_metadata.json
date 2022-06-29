@@ -23,7 +23,7 @@
   "well_designation": {
     "F03": {
       "Reaction Type": "TXTL",
-      "Lysate_First": "True",
+      "Lysate_First": "False",
       "Experiment #": 11,
       "System": "AP_Lysate_004",
       "Energy Solution": "Michael_ES_001",
@@ -42,7 +42,7 @@
     },
     "F05": {
       "Reaction Type": "TXTL",
-      "Lysate_First": "True",
+      "Lysate_First": "False",
       "Experiment #": 11,
       "System": "AP_Lysate_004",
       "Energy Solution": "Michael_ES_001",
@@ -61,7 +61,7 @@
     },
     "F07": {
       "Reaction Type": "TXTL",
-      "Lysate_First": "True",
+      "Lysate_First": "False",
       "Experiment #": 11,
       "System": "AP_Lysate_004",
       "Energy Solution": "Michael_ES_001",
@@ -80,7 +80,7 @@
     },
     "F09": {
       "Reaction Type": "TXTL",
-      "Lysate_First": "True",
+      "Lysate_First": "False",
       "Experiment #": 11,
       "System": "AP_Lysate_004",
       "Energy Solution": "Michael_ES_001",
@@ -99,7 +99,7 @@
     },
     "F11": {
       "Reaction Type": "TXTL",
-      "Lysate_First": "True",
+      "Lysate_First": "False",
       "Experiment #": 11,
       "System": "AP_Lysate_004",
       "Energy Solution": "Michael_ES_001",
@@ -118,7 +118,7 @@
     },
     "F13": {
       "Reaction Type": "TXTL",
-      "Lysate_First": "True",
+      "Lysate_First": "False",
       "Experiment #": 11,
       "System": "AP_Lysate_004",
       "Energy Solution": "Michael_ES_001",
@@ -137,7 +137,7 @@
     },
     "F15": {
       "Reaction Type": "TXTL",
-      "Lysate_First": "True",
+      "Lysate_First": "False",
       "Experiment #": 11,
       "System": "AP_Lysate_004",
       "Energy Solution": "Michael_ES_001",
@@ -156,7 +156,7 @@
     },
     "F17": {
       "Reaction Type": "TXTL",
-      "Lysate_First": "True",
+      "Lysate_First": "False",
       "Experiment #": 11,
       "System": "AP_Lysate_004",
       "Energy Solution": "Michael_ES_001",
@@ -175,7 +175,7 @@
     },
     "F19": {
       "Reaction Type": "TXTL",
-      "Lysate_First": "True",
+      "Lysate_First": "False",
       "Experiment #": 11,
       "System": "AP_Lysate_004",
       "Energy Solution": "Michael_ES_001",
@@ -194,7 +194,7 @@
     },
     "F21": {
       "Reaction Type": "TXTL",
-      "Lysate_First": "True",
+      "Lysate_First": "False",
       "Experiment #": 11,
       "System": "AP_Lysate_004",
       "Energy Solution": "Michael_ES_001",
