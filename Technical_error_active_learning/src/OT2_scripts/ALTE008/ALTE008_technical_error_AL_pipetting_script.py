@@ -24,10 +24,12 @@ def run(protocol: protocol_api.ProtocolContext):
 
     # 0. Reading in json setting files-----------------------------------------
 
+    experiment_prefix = "ALTE008"
+
     # Defining the file paths of raspberry pi
-    experiment_settings_dict_path = "/data/user_storage/ALTE007/ALTE007_experiment_settings.json"
-    labware_settings_dict_path = "/data/user_storage/ALTE007/ALTE007_labware_settings.json"
-    pipetting_settings_dict_path = "/data/user_storage/ALTE007/ALTE007_pipetting_settings.json"
+    experiment_settings_dict_path = "/data/user_storage/"+ experiment_prefix + "/" + experiment_prefix + "_experiment_settings.json"
+    labware_settings_dict_path = "/data/user_storage/"+ experiment_prefix + "/" + experiment_prefix + "_labware_settings.json"
+    pipetting_settings_dict_path = "/data/user_storage/" + experiment_prefix + "/" + experiment_prefix + "_pipetting_settings.json"
 
     # Reading in json json_settings_file
     experiment_settings_dict = json.load(open(experiment_settings_dict_path, 'r'))
@@ -54,7 +56,6 @@ def run(protocol: protocol_api.ProtocolContext):
     protocol.comment(labware_settings_dict["temp_module_pos"])
     temperature_module = protocol.load_module(labware_settings_dict["temp_module_name"], labware_settings_dict["temp_module_pos"])
 
-    protocol.pause("Stop")
 
     # Defining the pcr plate ontop of the temperature module
     pcr_temp_plate = temperature_module.load_labware(
@@ -153,6 +154,9 @@ def run(protocol: protocol_api.ProtocolContext):
 
     # 3. Running protocol------------------------------------------------------
 
+
+
+
     # Set temperature of temperature module to 4 degrees. The protocol will pause
     # until this is reached.
     temperature_module.set_temperature(4)
@@ -160,38 +164,6 @@ def run(protocol: protocol_api.ProtocolContext):
     # Extracting the different experiments from the experiments
     # settings file
     experiment_ids = experiment_settings_dict.keys()
-
-    # Running the lysate dispense step if protocol_dispense_lysate = True
-    if protocol_dispense_lysate:
-
-        # Looping through the different experiments
-        for experiment_id in experiment_ids:
-
-            # Outputting the name of the experiment that is being ran
-            protocol.comment("Running experiment " + experiment_id)
-
-            # Defining the source wells for the different components in this experiment
-            lysate_source_well = pcr_temp_plate[experiment_settings_dict[experiment_id]["lysate_source_well"]]
-
-            # Defining a list of wells for dispensing
-            dispense_well_list = experiment_settings_dict[experiment_id]["dispense_well_list"]
-
-            # Defining the initial lysate aspiration height
-            lysate_aspirate_height = pipetting_settings_dict["lysate_aspirate_height_init"]
-
-            # Dispensing lysate into each of the wells in dispense well list
-            for well in dispense_well_list:
-
-                # Caliing function to distribute lysate
-                distribute_lysate(well, lysate_source_well, lysate_aspirate_height)
-
-                # Reducing the aspiration height by lysate_aspirate_height_inc
-                lysate_aspirate_height -= pipetting_settings_dict["lysate_aspirate_height_inc"]
-
-            protocol.comment("Lysate dispense step complete for experiment " + experiment_id)
-
-
-
 
 
 
@@ -226,7 +198,45 @@ def run(protocol: protocol_api.ProtocolContext):
 
             protocol.comment("Substrate dispense step complete for experiment " + experiment_id)
 
+
+
+
+    # Running the lysate dispense step if protocol_dispense_lysate = True
+    if protocol_dispense_lysate:
+
+        # Looping through the different experiments
+        for experiment_id in experiment_ids:
+
+            # Outputting the name of the experiment that is being ran
+            protocol.comment("Running experiment " + experiment_id)
+
+            # Defining the source wells for the different components in this experiment
+            lysate_source_well = pcr_temp_plate[experiment_settings_dict[experiment_id]["lysate_source_well"]]
+
+            # Defining a list of wells for dispensing
+            dispense_well_list = experiment_settings_dict[experiment_id]["dispense_well_list"]
+
+            # Defining the initial lysate aspiration height
+            lysate_aspirate_height = pipetting_settings_dict["lysate_aspirate_height_init"]
+
+            # Dispensing lysate into each of the wells in dispense well list
+            for well in dispense_well_list:
+
+                # Caliing function to distribute lysate
+                distribute_lysate(well, lysate_source_well, lysate_aspirate_height)
+
+                # Reducing the aspiration height by lysate_aspirate_height_inc
+                lysate_aspirate_height -= pipetting_settings_dict["lysate_aspirate_height_inc"]
+
+            protocol.comment("Lysate dispense step complete for experiment " + experiment_id)
+
+
+
     # Pausing protocol so the plate can be span down in the centrifuge before
+
+    # Turning off temp module after all experiments have finished
+    temperature_module.deactivate()
+
     # adding the wax ontop
     protocol.pause("Check plate and spin down, before replacing for wax")
 
@@ -246,6 +256,3 @@ def run(protocol: protocol_api.ProtocolContext):
             dispense_wax_to_individual_replicate_set(dispense_well_list)
 
             protocol.comment("Wax dispense step complete for experiment " + experiment_id)
-
-    # Turning off temp module after all experiments have finished
-    temperature_module.deactivate()
