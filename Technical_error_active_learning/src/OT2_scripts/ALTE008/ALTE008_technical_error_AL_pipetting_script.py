@@ -52,8 +52,6 @@ def run(protocol: protocol_api.ProtocolContext):
     # labware
 
     # Defining the temperature module
-    protocol.comment(labware_settings_dict["temp_module_name"])
-    protocol.comment(labware_settings_dict["temp_module_pos"])
     temperature_module = protocol.load_module(labware_settings_dict["temp_module_name"], labware_settings_dict["temp_module_pos"])
 
 
