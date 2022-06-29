@@ -132,7 +132,7 @@ def run(protocol: protocol_api.ProtocolContext):
         """ defines the dispense wax function """
 
         # Pick up a 300ul tip
-        right_pipette.pick_up_tip()
+        #right_pipette.pick_up_tip()
 
         # Distributing 35ul of wax ontop of each well in dispense_well_list
         right_pipette.distribute(
@@ -149,7 +149,7 @@ def run(protocol: protocol_api.ProtocolContext):
         )
 
         # Drops tip
-        right_pipette.drop_tip()
+        #right_pipette.drop_tip()
 
 
     # 3. Running protocol------------------------------------------------------
