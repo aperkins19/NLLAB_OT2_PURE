@@ -139,8 +139,18 @@ As we had a load of trouble with ALTE005, having had to do multiple runs and see
 
 We're also trialling sticking the substrates in first before the viscous lysate and seeing if that makes a difference. -  Used MS substrates
 
-* Saw one of the end of the substrates not pick enough up. Maybe the asp_increment isn't keeping up towards the end. Decrease by 0.1 for ALTE008
+* ~Saw one of the end of the substrates not pick enough up. Maybe the asp_increment isn't keeping up towards the end. Decrease by 0.1 for ALTE008~
 
-* turn off temp module at spin down wax pause.
+* ~turn off temp module at spin down wax pause.~
 
-* Change wax step to always get new tip
+* ~Change wax step to always get new tip~
+
+### ALTE008
+
+Whether lysate or substrates first was a bit inconclusive due to a couple of wells missing a bit of substrates and there not being much difference besides. Hence we've decided to stick with substrates first for now.
+
+* the script has been converted to standard for loop through the experiments - all substrates for all experiments and then all lysates.
+
+* have lowered the substrates asp increment by 0.1 to 0.7.
+
+This experiment will be a total repeat of the same settings.
