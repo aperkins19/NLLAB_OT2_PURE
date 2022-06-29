@@ -154,3 +154,8 @@ Whether lysate or substrates first was a bit inconclusive due to a couple of wel
 * have lowered the substrates asp increment by 0.1 to 0.7.
 
 This experiment will be a total repeat of the same settings.
+
+### Notes
+
+* Looks like all wells got consistent lysate and substrates
+* Still haven't resolved the wax double dipping problem
