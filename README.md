@@ -1,117 +1,105 @@
-# Protocol development for OT2 Opentron
+# Introduction
+
+Instructions for deploying the analysis environment and descriptions of the code and workflows within.
+
+##### Bugs /  Opentrons Feedback
+* Offset calibrations file can't be found
+* Could they sell a bolt on self calibrator for those who need more consistant work?
 
 
-# Project Planning & Management
+
+# Usage
+
+1. Open command line and navigate to the unpacked directory
+
+You can get the path by 'Copy address as text' in the URL of your file manager.
+Be sure to stick the url in it's own quotes as below. This enters it as a string and will allow CMD to read any spaces in the path correctly.
 
 
-## 23/06/2022
+```bash
+cd "C://mypath/directory/my project/subfolder"
+```
 
-* Managed to ssh into the opentron raspberry pi and copy files across
-* Managed to read in a json file into a protocol and print it out as a comment
-* Created three json settings files - experiment, labware and pipetting json settings files.
-  Now the protocol script will read in these files rather than having hardcoded values.
-* The new process will be to have a folder (e.g. ALTE007) that has the protocol .py
-  file along with the json settings files. This can then be copied across to the
-  raspberry pi and then the protocol can be either ran from the command line or the
-  ui can be used. All the file paths in the protocol .py file are absolute paths
-  so it doesn't matter where the protocol .py file is executed.
-* Also found a bug when executing the protocol from the command line. We get the following error
-  **/data/robot_settings.json not found. Loading defaults**.
-  Maybe this is why we always need to do the pipette offset every time we run
-  as it keeps reverting to the default?
+2. Build the docker image
 
-## 15/06/2022
+```bash
+docker build -t technical_error_analysis_docker_image .
+```
 
-* Re ran ALTE005 as no signal was observed in any of the replicates. Something could have been left out the substrate master mix.
-* MS observed Opentron pipetting and replicate 1 and 7 did not receive any substrate master mix. Need to adjust the aspiration height down.
+3. Run your container on port 9998
 
-## 14/06/2022
+Windows:
+```bash
+docker run -p 9998:8888 -v "%CD%":/app --name technical_error_analysis_docker_container technical_error_analysis_docker_image
+```
 
-* Alex ran ALTE005 overnight. OT2 script and metadata file updated and pushed
-* The run seemed to run okay - maybe the M21 didn't get as much substrate mix? but hard to say.
-* we should add robot lights flashing and a "please spin down the plate before replacing in.. ^ insert deck slot^^  flash message"
-* maybe not all getting same vol of wax due to headspace?
+If you're on Mac or Linux:
 
-## 12th of June 2022
+```bash
+docker run -p 8888:8888 -v "%PWD":/app --name technical_error_analysis_docker_container technical_error_analysis_docker_image
+```
 
-* Alex wrote and pushed Data script #3. The script compiles the tidy data sets together and output some plots.
+The way it works is by:
+a. starting a Docker Container
+b. Mounting your current directory ("%CD%") to
+a directory in the container ("/app") so that files can be shared and moved in and out.
+c. starting a Jupyter server.
 
-* Trialled a place holder script src/active_learning/GP_test.ipynb that messes around with GPS but we can delete it and start again later.
+4. If it has started correctly, you'll get a url token. Copy the token provided into your brower URL
 
-## 07/06/2022
+It should look like this:
 
-### Run by MS
+`http://127.0.0.1:8888/?token=3c96d2a50decb4302c3e96b87ba7444d286e335d07c478fe`
 
-* Ran 10 replicates of pbest DNA on opentron with MS lysate 1 and MS Energy Solution 001.
-* 2 replicates (towards the end) never got any master mix - need to increase the substrate aspiration height increment
-* Made a mistake and put well plate back on opentron in wrong place after spinning so did wax step myself.
-* Only measuring GFP for 12 hours.
+It should open up a Jupyter File explorer in the directory in your browser.
 
-## Bug fixes by AP
-Changed preprocessing scripts to:
-* cope better with different types of time lists.
-* rearrange the header metadata in "_raw.csv" so we don't have to do it manually
-* fixed the processing of ALTE004 and produced the plots.
-* Had a go trying to go get black to work. https://atom.io/packages/atom-black
+# Connecting to OT2 through ssh
 
-#### Question for Michael - have you updated the energy solution height increment post ALTE004?  LMK
+## Generating key pair
+```bash
+ssh-keygen
+```
 
-## 30/05/2022
+## Sending public key to raspberry pi
 
-* Changed robot level and recalibrated. Offset seems to be reduced but still occurs. Have discovered that you can, in fact, run a 'Labware Offset Check' when setting up the deck to run a protocol.
-This allows you to tell robot exactly where the bits of labware are and seems to correct the offset. See pipette_offset_data.png in this directory for correction data. This appears to have fixed the problem.
+### Command template - This needs to be ran in Powershell
+@{key = Get-Content [ssh key file path] | Out-String} | ConvertTo-Json | Invoke-WebRequest -Method Post -ContentType 'application/json' -Uri [OT2 ip]:31950/server/ssh_keys -UseBasicParsing
 
-* Run another 10x 2.5ul lysate check: Better ! But pipetting destination in the well is a little inconsistent but maybe this is due to variable pipette curvatures / mounting angles on the pipette.
+```bash
+@{key = Get-Content C:\users\s1530400\.ssh\id_rsa | Out-String} | ConvertTo-Json | Invoke-WebRequest -Method Post -ContentType 'application/json' -Uri 169.254.156.218:31950/server/ssh_keys -UseBasicParsing
+```
 
-* Probably good enough to continue to a first CFPS run.
+## Transferring a file over
 
-## To do  - Near term
+### Note!!!
+Can't transfer files from M:\ datastore folder path for some reason. Transfer files from C:\.
 
-* Put all pipetting parameters into a dictionary
+### Command template
+scp -i [ssh key file path] [file_path_from_local] root@[OT2 IP (may change - find in OT2 UI)]:[file_path_on_ot2]
 
-* Install Black
+```bash
+scp -i C:\users\s1530400\.ssh\id_rsa C:\users\s1530400\NLLAB_OT2_Protocol_Dev\Technical_error_active_learning\src\OT2_scripts\OT2_settings\test.json root@169.254.156.218:/data/user_storage/al_cell_free
+```
 
-* Get the Opentron to make a master mix of energy solution, dna, (malachite green),
-chi6, buffer, water. This could be a separate script, *or a modular function that can simply be called upstream of the plating functions*. AP
+## Transferring a folder over
 
-* Design the technical error optimiser - once we have our 1st 10x cfps replicated. let's sit down with pen, paper and coffee and design the algorithm + software plan next week. AP
+### Command template
+scp -r -i [ssh key file path] [file_path_from_local] root@[OT2 IP (may change - find in OT2 UI)]:[file_path_on_ot2]
 
-* Code wax pipette step and fix pipette
-  * OT2 parts.
-    * Insert sink plugs into 3D printed tube rack with Mirren.
-    * Confirm dimensions + build quality
-    * Order rest of parts from U create.
+### This example transfers a whole folder called ALTE007 which contains the protocol .py file, the experiment settings json file,
+### the labware settings json file and the pipetting settings json files
+```bash
+scp -r -i C:\users\nllab_ot2\.ssh\ot2_ssh_key C:\users\nllab_ot2\NLLAB_OT2_Protocol_Dev\Technical_error_active_learning\src\OT2_scripts\ALTE007\ root@169.254.156.218:/data/user_storage/
+```
 
-## To do - Far term
+## Connecting to the OT2 raspberry pi
+ssh -i ot2_ssh_key root@[OT2 IP]
 
-* **Recalibration**  Get the Opentron to distribute lysate onto the 384 well plate - 10 replicates.
-This seems to be working now, however, we have been having issues with the calibration
-of the opentron. It seems to be off by about 1 mm in the z axis and x axis (it
-is off when picking up a tip even after calibrating.)
-  * Alex has brought in his spirit level - use this to ensure the OT2 is level by adjusting feet.
-  * Need to do a factory reset
+```bash
+ssh -i C:\Users\nllab_ot2\.ssh\ot2_ssh_key root@169.254.156.218
+```
 
-* Run successive rounds of technical error reduction active learning.
-
-* Design 3D printed PCR tube rack
-
-
-### Completed
-
-* ~create /app in linux of docker~
-* ~Set up first lysate reaction with OT2~
-* ~Set up temperature module~
-* ~Characterise handling lysate. Create a script to try different parameters
-and see the technical error. **We tried doing this by weighing pcr tubes before
-and after using the chemical balance but the volumes (~2.5ul doesn't weigh enough
-for the instument to capture the error. We have decided to proceed straight to the
-CFPS reaction and use variance between technical replicates as a proxy for
-pipetting error.**~
-* ~Get the Opentron to consistently pipette lysate into 10 pcr tubes. Need to make sure
-we get the aspiration height and dispense height correct. We can set this up to work
-for 30ul of lysate in a pcr tube. Unfortunately, we can't measure this from weighing
-the tubes as the volumes are too small. May need to check this by eye and then we
-can keep track of the error by using the technical error from the plate reader reactions.
-If this technical error is small then the lysate distribution must be pretty consistent.
-We decided to move onto just pipetting into the 384 well plate and optimising that
-rather than optimising it for pipetting into pcr tubes.~
+## Running the protocol from the command line (on raspberry pi)
+```bash
+opentrons_execute ALTE007_technical_error_AL_pipetting_script.py
+```
