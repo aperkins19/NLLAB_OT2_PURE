@@ -5,6 +5,7 @@ import json
 metadata = {
     "protocolName": "PURE CFPS Plating Script v1",
     "author": "Alex Perkins",
+    
     "email": "a.j.p.perkins@sms.ed.ac.uk",
     "description": "First draft of script to plate out 3x PURE rxns",
     "apiLevel": "2.3",
