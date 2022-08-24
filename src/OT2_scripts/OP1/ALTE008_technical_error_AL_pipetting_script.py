@@ -3,10 +3,10 @@ import json
 
 # metadata
 metadata = {
-    "protocolName": "Lysate CFPS Plating Script v1",
+    "protocolName": "PURE CFPS Plating Script v1",
     "author": "Alex Perkins",
     "email": "a.j.p.perkins@sms.ed.ac.uk",
-    "description": "First draft of script to plate out 10x lysate reactions",
+    "description": "First draft of script to plate out 3x PURE rxns",
     "apiLevel": "2.3",
 }
 
@@ -24,7 +24,7 @@ def run(protocol: protocol_api.ProtocolContext):
 
     # 0. Reading in json setting files-----------------------------------------
 
-    experiment_prefix = "ALTE008"
+    experiment_prefix = "OP1"
 
     # Defining the file paths of raspberry pi
     experiment_settings_dict_path = "/data/user_storage/"+ experiment_prefix + "/" + experiment_prefix + "_experiment_settings.json"

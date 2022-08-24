@@ -1,0 +1,25 @@
+{ "DNA_Templates": {
+
+  "T7_deGFP_MGA": {"Well": "A8", "Concentration nM": 148}
+
+  },
+
+"Substates_Mastermix_Components": {
+
+  "Malachite_Green": {"Well": "B8", "Concentration nM": 148},
+  "Energy_Solution": {"Well": "C8", "Concentration nM": 148},
+  "H20": {"Well": "D8", "Concentration nM": 148}",
+
+
+
+  },
+
+"Components": {
+              "Base_System": {"Name": "Delta_T7_PURE", "Well":"E8", "Stock Concentration mg/ml": 12.25},
+
+              "Supplimentry_Components": {
+                "T7_RNAP": {"Well": "F8", "Stock Concentration mg/ml": 12.25},
+                "Ribosomes": {"Well": "G8", "Stock Concentration mg/ml": 12.25}
+                                         }
+              }
+}
