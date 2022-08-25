@@ -81,3 +81,9 @@ You can do this by clicking here and following the instructions. **Be sure to do
 **Now place the labware securely into the OT2 using the diagram below.**
 
 ![Open Protocol](img/open_protocol.png)
+
+** Your deck should look like this. Make sure everything is secure!**
+
+![Deck Picture](img/deck_picture.png)
+
+** Now select "Run Protocol", Select the OT2 and "Proceed to setup" at the bottom.**
