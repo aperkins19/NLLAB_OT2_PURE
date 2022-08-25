@@ -18,4 +18,11 @@ If you're sucessful, you'll see something like this:
 
 ![Desktop Navigation](img/initial_navigation.png)
 
-* 
+Next you need to download the repository using the git clone command:
+
+```bash
+git clone https://github.com/aperkins19/NLLAB_OT2_PURE/OD600_OT2
+```
+If you're sucessful, you'll see something like this:
+
+![Git Clone](img/git_clone.png)e
