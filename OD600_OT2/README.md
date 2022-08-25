@@ -15,8 +15,8 @@ You can confirm this by turning the lights on.
 
 ![OT2 Connection](img/ot2_connection.png)
 
-See if the protocol already exists by opening the *OT2_Protocols* folder on the desktop.  
-You should see NLLAB_OT2_PURE, if it's not there then follow the instructions in the *Downloads* section below. If it is there then skip to *The Files*.
+See if the protocol already exists by opening the **OT2_Protocols** folder on the desktop.  
+You should see NLLAB_OT2_PURE, if it's not there then follow the instructions in the **Downloads** section below. If it is there then skip to **The Files**.
 
 #### Download
 
@@ -28,7 +28,7 @@ e.g.
 cd Desktop/OT2_Protocols
 ```
 
-If you're sucessful, you'll see something like this:
+If you're successful, you'll see something like this:
 
 ![Desktop Navigation](img/initial_navigation.png)
 
@@ -37,7 +37,7 @@ Next you need to download the repository using the git clone command:
 ```bash
 git clone https://github.com/aperkins19/NLLAB_OT2_PURE
 ```
-If you're sucessful, you'll see something like this:
+If you're successful, you'll see something like this:
 
 ![Git Clone](img/git_clone.png)
 
@@ -48,7 +48,7 @@ Now open the folder in your file system:
 
 ![Top Files](img/top_files.png)
 
-And navigate into *OD600_OT2*.  
+And navigate into **OD600_OT2**.  
 
 ![OD600 Files](img/od600_files.png)
 
@@ -60,6 +60,9 @@ You should see the following files, this contains everything you need to perform
 
 ## Setting up the OT2
 
-I *highly recommend* performing a deck calibration before you go any further. The OT2 is fickle creature and you don't want to mess up your samples with a crash.
+I *highly recommend* performing a deck calibration before you go any further. The OT2 is fickle creature and you don't want to mess up your samples with a crash.  
+You can do this by clicking here and following the instructions. **Be sure to do it as accurately as you can**:  
+
+![Deck Calibration](img/deck_calibration.png)
 
 Next, you need to upload the OT2 script. Go to the Protocols tab and select Upload Protocol.
