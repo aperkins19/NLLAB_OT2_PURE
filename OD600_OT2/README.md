@@ -54,8 +54,17 @@ And navigate into **OD600_OT2**.
 
 You should see the following files, this contains everything you need to perform the OD600 dilutions with the OT2, reading the plate with the Biotek H1 plate reader and the analysis.  
 
-* file 1
+* **OT2_Script_Plating_OD600_from_96x_deepwell.json**: The OT2 Script
 * file 2
+
+#### The Labware
+
+* 1 full box of clean 300ul OT2 pipette tips (# product code).
+* 1 50ml Falcon Tube with **exactly** 22ml of fresh LB media.
+* 1 OT2 Falcon Tube rack for 6x 15ml and 4x 50ml Falcons.
+* 1 Clean Nunc 96 black flat bottom plate (# product code).
+* 1 15ml Falcon with the 2ml overnight of EFTu, strain #25.
+* 96x deep well plate with 300ul overnights in the format below:
 
 
 ## Setting up the OT2
@@ -65,4 +74,8 @@ You can do this by clicking here and following the instructions. **Be sure to do
 
 ![Deck Calibration](img/deck_calibration.png)
 
-Next, you need to upload the OT2 script. Go to the Protocols tab and select Upload Protocol.
+Next, you need to upload the OT2 script. Go to the Protocols tab and select **Choose File**, then select *OT2_Script_Plating_OD600_from_96x_deepwell.json*.  
+
+Now place the labware securely into the OT2 using the diagram below.
+
+![Upload Protocol](img/upload_protocol.png)
