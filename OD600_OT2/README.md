@@ -84,6 +84,13 @@ You can do this by clicking here and following the instructions. **Be sure to do
 
 ** Your deck should look like this. Make sure everything is secure!**
 
-![Deck Picture](img/deck_picture.png)
+![Deck Picture](img/deck_picture)
 
 ** Now select "Run Protocol", Select the OT2 and "Proceed to setup" at the bottom.**
+
+Hopefully you will have a "Calibration Ready" next to Robot Calibration. **This is solely for the Deck**, keep scrolling down until you find *Run Labware Position Check*.  
+Select it and follow the instructions. **This is very important.**
+
+![Calibration Offset](img/cali_off)
+
+#### Calibration Offset Check
