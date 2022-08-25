@@ -76,6 +76,8 @@ You can do this by clicking here and following the instructions. **Be sure to do
 
 Next, you need to upload the OT2 script. Go to the Protocols tab and select **Choose File**, then select *OT2_Script_Plating_OD600_from_96x_deepwell.json*.  
 
+![Upload Protocol](img/upload_protocol.png)
+
 Now place the labware securely into the OT2 using the diagram below.
 
-![Upload Protocol](img/upload_protocol.png)
+![Open Protocol](img/open_protocol.png)
