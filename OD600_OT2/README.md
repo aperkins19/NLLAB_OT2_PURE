@@ -94,3 +94,11 @@ Select it and follow the instructions. **This is very important.**
 ![Calibration Offset](img/cali_off.png)
 
 #### Calibration Offset Check
+
+You will probably have to adjust the labware offsets. Do this by selecting **Reveal Jog Controls**.
+Make sure that what you're positioning is centered exactly over the centre of what you're positioning it over.  
+In terms of height (Z axis) you want the pipette tip to be *just* above the top of the well or tube. The gap should be with in 0.1mm, so a tiny slither of light. Having said that, it's better to have it slightly too high than too low. Even though the labware is supposed to be made to very high spec, warping and tiny deviations can been that, for example: At the bottom of well A1, the tip is 0.1mm above the bottom of the well but at the bottom of G7, the tip might touch the bottom. This means that the tip will not aspirate/dispense leading to a build up in pressure which is released when the tip moves up again. This leads to greatly increased technical error and possibly your sample being flung across the robot.  
+So do this carefully and err on the side of caution.  
+The picture below illustrates what you're after.
+
+![Good Calibration](img/good_cali.png)
