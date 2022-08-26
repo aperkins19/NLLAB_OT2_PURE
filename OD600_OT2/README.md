@@ -62,9 +62,9 @@ You should see the following files, this contains everything you need to perform
 * 1 full box of clean 300ul OT2 pipette tips (# product code).
 * 1 50ml Falcon Tube with **exactly** 22ml of fresh LB media.
 * 1 OT2 Falcon Tube rack for 6x 15ml and 4x 50ml Falcons.
-* 1 Clean Nunc 96 black flat bottom plate (# product code).
+* 1 Clean Nunc 96 black flat bottom plate (**#655906**).
 * 1 15ml Falcon with the 2ml overnight of EFTu, strain #25.
-* 96x deep well plate with 300ul overnights in the format below:
+* 96x deep well plate (**#260252**) with 300ul overnights in the format below:
 
 
 ## Setting up the OT2
@@ -82,11 +82,11 @@ You can do this by clicking here and following the instructions. **Be sure to do
 
 ![Open Protocol](img/open_protocol.png)
 
-** Your deck should look like this. Make sure everything is secure!**
+**Your deck should look like this. Make sure everything is secure!**
 
 ![Deck Picture](img/deck_picture.png)
 
-** Now select "Run Protocol", Select the OT2 and "Proceed to setup" at the bottom.**
+**Now select "Run Protocol", Select the OT2 and "Proceed to setup" at the bottom.**
 
 Hopefully you will have a "Calibration Ready" next to Robot Calibration. **This is solely for the Deck**, keep scrolling down until you find *Run Labware Position Check*.  
 Select it and follow the instructions. **This is very important.**
