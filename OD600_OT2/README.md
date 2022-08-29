@@ -64,6 +64,7 @@ You should see the following files, this contains everything you need to perform
 * 1 OT2 Falcon Tube rack for 6x 15ml and 4x 50ml Falcons.
 * 1 Clean Nunc 96 black flat bottom plate (**#655906**).
 * 1 15ml Falcon with the 2ml overnight of EFTu, strain #25.
+* 1 15ml Falcon, clean and sterile.
 * 96x deep well plate (**#260252**) with 300ul overnights in the format below:
 
 
