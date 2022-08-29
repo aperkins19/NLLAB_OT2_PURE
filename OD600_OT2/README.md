@@ -134,7 +134,7 @@ The section ends with dispensing 300ul of LB into wells H11 & H12 to serve as bl
 
 **Feel free to remove the OD600 plate for measurement at this point (instructions below).**
 
-After plating the diluted OD600 samples, the protocol progresses to the Main Master Culture Inoculum Compilation. The purpose is to take 55ul of each culture (Except EFTu which is 1655ul) and compile them into one tube ready for adding straight to the culture.  
+After plating the diluted OD600 samples, the protocol progresses to the Main Master Culture Inoculum Compilation. The purpose is to take 55ul of each culture (Except EFTu which is 1675 ul) and compile them into one tube ready for adding straight to the culture.  
 
 * The robot takes 55ul from each culture in a "multi-aspirate" step (figure below) and dispenses them into a clean 15ml Falcon in C1 of the Tube Rack.
-* It then transfers 1655ul of EFTu from A1 to C1 in multiple steps.
+* It then transfers 1675 ul of EFTu from A1 to C1 in multiple steps.
