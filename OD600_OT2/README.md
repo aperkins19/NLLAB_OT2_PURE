@@ -108,12 +108,20 @@ The picture below illustrates what you're after.
 
 ## The Protocol
 
-The protocol has two distinct phases: **OD600 Plating** & **Inoculum Compilation**.
+The protocol has two distinct phases: **Inoculum Compilation**& **OD600 Plating**.
+
+### Inoculum Compilation
+
+First the robot performs the Main Master Culture Inoculum Compilation. The purpose is to take 55ul of each culture (Except EFTu which is 1675 ul) and compile them into one tube ready for adding straight to the culture.  
+
+* It then transfers 1675 ul of EFTu from A1 to C1 in multiple steps.
+* The robot takes 55ul from each culture in a "multi-aspirate" step (figure below) and dispenses them into a clean 15ml Falcon in C1 of the Tube Rack.
+
+**Feel free to remove the compiled Inoculum for starting the main culture at this point.**
 
 ### OD600 Plating
 
 This section yields a Nunc 96 Flat-Bottom containing PURE Overnights 10x dilutions ready for absorbance measurement in the plate reader. It takes ~55mins.
-
 
 The following function repeats for every overnight on the deep well plate:
 
@@ -130,14 +138,4 @@ This is repeated for all PURE overnights and maps the deep well to the nunc. Exc
 
 The section ends with dispensing 300ul of LB into wells H11 & H12 to serve as blanks.
 
-
-### Inoculum Compilation
-
 **Feel free to remove the OD600 plate for measurement at this point (instructions below).**
-
-After plating the diluted OD600 samples, the protocol progresses to the Main Master Culture Inoculum Compilation. The purpose is to take 55ul of each culture (Except EFTu which is 1675 ul) and compile them into one tube ready for adding straight to the culture.  
-
-* It then transfers 1675 ul of EFTu from A1 to C1 in multiple steps.
-* The robot takes 55ul from each culture in a "multi-aspirate" step (figure below) and dispenses them into a clean 15ml Falcon in C1 of the Tube Rack.
-
-**Feel free to remove the compiled Inoculum for starting the main culture at this point.**
