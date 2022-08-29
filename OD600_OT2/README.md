@@ -1,4 +1,4 @@
-# Guide to automated OD600
+# Guide to Automated OD600 Plating Using the OT2
 
 This guide will walk you through how to perform OD600 measurements of the overnight cultures of the PURE system.
 
@@ -138,3 +138,5 @@ After plating the diluted OD600 samples, the protocol progresses to the Main Mas
 
 * The robot takes 55ul from each culture in a "multi-aspirate" step (figure below) and dispenses them into a clean 15ml Falcon in C1 of the Tube Rack.
 * It then transfers 1675 ul of EFTu from A1 to C1 in multiple steps.
+
+**Feel free to remove the compiled Inoculum for starting the main culture at this point.**
