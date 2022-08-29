@@ -102,3 +102,29 @@ So do this carefully and err on the side of caution.
 The picture below illustrates what you're after.
 
 ![Good Calibration](img/good_cali.png)
+
+
+
+## The Protocol
+
+The protocol has two distinct phases: **OD600 Plating** & **Inoculum Compilation**.
+
+### OD600 Plating
+
+This section yields a Nunc 96 Flat-Bottom containing PURE Overnights 10x dilutions ready for absorbance measurement in the plate reader.
+
+
+The following function repeats for every overnight on the deep well plate:
+
+For illustrative purposes, the loop will be described in terms of strain #1 in well A1.
+
+* The robot picks up a new tip
+* Aspirates 270ul of fresh LB from the 50ml Falcon and dispenses into A1 of the Nunc 96 Flat-Bottom.
+* Aspirates 30ul of Overnight Culture from A1 of the Deep Well plate and Dispenses into A1 of the Nunc 96 Flat-Bottom with a short mix step.
+* Trashes the tip.
+
+This is repeated for all PURE overnights and maps the deep well to the nunc. Except for EFTu (Strain #25) in the 15ml Falcon which is in A1 of the tube rack and is plated into the Elongation Factor Section between #24 & #25.
+
+**Blanks**
+
+The section ends with dispensing 300ul of LB into wells H11 & H12 to serve as blanks.
