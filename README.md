@@ -57,13 +57,14 @@ It should open up a Jupyter File explorer in the directory in your browser.
 
 ## Generating key pair
 ```bash
-ssh-keygen
+ssh-keygens
 ```
 
 ## Sending public key to raspberry pi
 
 ### Command template - This needs to be ran in Powershell
 @{key = Get-Content [ssh key file path] | Out-String} | ConvertTo-Json | Invoke-WebRequest -Method Post -ContentType 'application/json' -Uri [OT2 ip]:31950/server/ssh_keys -UseBasicParsing
+
 
 ```bash
 @{key = Get-Content C:\users\s1530400\.ssh\id_rsa | Out-String} | ConvertTo-Json | Invoke-WebRequest -Method Post -ContentType 'application/json' -Uri 169.254.156.218:31950/server/ssh_keys -UseBasicParsing
