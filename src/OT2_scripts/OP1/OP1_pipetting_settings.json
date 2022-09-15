@@ -1,4 +1,11 @@
 {
+
+  "ribosomes_aspirate_volume" : 3,
+  "ribosomes_dispense_volume" : 2.5,
+  "ribosomes_aspirate_rate" : 0.2,
+  "ribosomes_dispense_rate" : 0.2,
+  "ribosomes_aspirate_height_inc" : 0.4,
+
   "lysate_aspirate_height_init" : 4.5,
 
   "lysate_aspirate_height_inc" : 0.4,

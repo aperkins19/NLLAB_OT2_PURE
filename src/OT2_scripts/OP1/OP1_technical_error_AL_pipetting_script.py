@@ -5,7 +5,7 @@ import json
 metadata = {
     "protocolName": "PURE CFPS Plating Script v1",
     "author": "Alex Perkins",
-    
+
     "email": "a.j.p.perkins@sms.ed.ac.uk",
     "description": "First draft of script to plate out 3x PURE rxns",
     "apiLevel": "2.3",
@@ -31,6 +31,7 @@ def run(protocol: protocol_api.ProtocolContext):
     experiment_settings_dict_path = "/data/user_storage/"+ experiment_prefix + "/" + experiment_prefix + "_experiment_settings.json"
     labware_settings_dict_path = "/data/user_storage/"+ experiment_prefix + "/" + experiment_prefix + "_labware_settings.json"
     pipetting_settings_dict_path = "/data/user_storage/" + experiment_prefix + "/" + experiment_prefix + "_pipetting_settings.json"
+    reagent_sources_dict_path = "/data/user_storage/" + experiment_prefix + "/" + experiment_prefix + "_reagent_sources.json"
 
     # Reading in json json_settings_file
     experiment_settings_dict = json.load(open(experiment_settings_dict_path, 'r'))
@@ -41,6 +42,9 @@ def run(protocol: protocol_api.ProtocolContext):
 
     pipetting_settings_dict = json.load(open(pipetting_settings_dict_path, 'r'))
     protocol.comment("Pipetting settings json file was read in")
+
+    reagent_sources_dict = json.load(open(reagent_sources_dict_path, 'r'))
+    protocol.comment("Reagent Sources json file was read in")
 
     # 1. Defining variables used in protocol-----------------------------------
 
@@ -57,10 +61,12 @@ def run(protocol: protocol_api.ProtocolContext):
 
 
     # Defining the pcr plate ontop of the temperature module
+    # https://www.bio-rad.com/en-uk/sku/hsp9601-hard-shell-96-well-pcr-plates-low-profile-thin-wall-skirted-white-clear?ID=hsp9601
     pcr_temp_plate = temperature_module.load_labware(
         labware_settings_dict["pcr_temp_plate_name"],
         label="Temperature-Controlled Tubes",
     )
+
     # Defining the 384 nunc well plate
     nunc_384 = protocol.load_labware(labware_settings_dict["nunc_384_name"], labware_settings_dict["nunc_384_pos"])
 
@@ -86,6 +92,26 @@ def run(protocol: protocol_api.ProtocolContext):
     )
 
     # 2. Defining functions used in this protocol------------------------------
+
+    # adding_and_mixing_ribosomes_with_components
+    def adding_and_mixing_ribosomes_with_components(well, ribosomes_source_well, ribosome_aspirate_height):
+
+        left_pipette.pick_up_tip()
+
+        left_pipette.well_bottom_clearance.aspirate = ribosome_aspirate_height
+        left_pipette.well_bottom_clearance.dispense = pipetting_settings_dict["lysate_dispense_well_bottom_clearance"]
+
+        # aspirate step
+        left_pipette.aspirate(pipetting_settings_dict["ribosomes_aspirate_volume"], source_well, rate=pipetting_settings_dict["ribosomes_aspirate_rate"])
+        left_pipette.move_to(source_well.top(-2))
+        protocol.delay(seconds=2)
+        left_pipette.touch_tip()
+
+        # Dispense Step
+        left_pipette.dispense(pipetting_settings_dict["ribosomes_dispense_volume"], pcr_temp_plate[well], rate=pipetting_settings_dict["ribosomes_dispense_rate"])
+        left_pipette.touch_tip()
+
+        left_pipette.drop_tip()
 
     # Distributing lysate
     def distribute_lysate(well, source_well, lysate_aspirate_height):
@@ -158,11 +184,25 @@ def run(protocol: protocol_api.ProtocolContext):
 
     # Set temperature of temperature module to 4 degrees. The protocol will pause
     # until this is reached.
-    temperature_module.set_temperature(4)
+    #temperature_module.set_temperature(4)
 
     # Extracting the different experiments from the experiments
+
     # settings file
     experiment_ids = experiment_settings_dict.keys()
+
+    # Master Mix Compilation
+    protocol.comment("Adding and mixing ribosomes with components...")
+
+    # Components + Ribosomes
+    for exp in experiment_settings_dict:
+
+        components_master_mix_well = experiment_settings_dict[exp]["lysate_source_well"]
+        ribosomes_source_well = reagent_sources_dict["Components"]["Supplimentry_Components"]["Ribosomes"]["Well"]
+        protocol.comment(ribosomes_source_well)
+        adding_and_mixing_ribosomes_with_components(components_master_mix_well, ribosomes_source_well, ribosome_aspirate_height)
+
+
 
 
 
