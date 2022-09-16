@@ -102,8 +102,8 @@ def run(protocol: protocol_api.ProtocolContext):
         left_pipette.well_bottom_clearance.dispense = pipetting_settings_dict["lysate_dispense_well_bottom_clearance"]
 
         # aspirate step
-        left_pipette.aspirate(pipetting_settings_dict["ribosomes_aspirate_volume"], source_well, rate=pipetting_settings_dict["ribosomes_aspirate_rate"])
-        left_pipette.move_to(source_well.top(-2))
+        left_pipette.aspirate(pipetting_settings_dict["ribosomes_aspirate_volume"], pcr_temp_plate[ribosomes_source_well], rate=pipetting_settings_dict["ribosomes_aspirate_rate"])
+        left_pipette.move_to(pcr_temp_plate[ribosomes_source_well].top(-2))
         protocol.delay(seconds=2)
         left_pipette.touch_tip()
 
@@ -195,6 +195,9 @@ def run(protocol: protocol_api.ProtocolContext):
     protocol.comment("Adding and mixing ribosomes with components...")
 
     # Components + Ribosomes
+
+    ribosome_aspirate_height = pipetting_settings_dict["ribosomes_aspirate_height_inc"]
+
     for exp in experiment_settings_dict:
 
         components_master_mix_well = experiment_settings_dict[exp]["lysate_source_well"]
