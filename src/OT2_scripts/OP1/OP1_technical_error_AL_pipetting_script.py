@@ -288,7 +288,7 @@ def run(protocol: protocol_api.ProtocolContext):
     # Ribosome Addition
 
     # toggle for ribosome adding_and_mixing_ribosomes_with_components
-    ribosome_mixing_step_toggle = False
+    ribosome_mixing_step_toggle = True
 
     if ribosome_mixing_step_toggle:
 
