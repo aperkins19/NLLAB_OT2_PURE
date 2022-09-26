@@ -5,19 +5,14 @@
   "ribosomes_aspirate_rate" : 0.2,
   "ribosomes_dispense_rate" : 0.2,
   "ribosomes_aspirate_height_inc" : 0.4,
+  "ribosomes_aspirate_height_init" : 0.4,
 
   "lysate_aspirate_height_init" : 4.5,
-
   "lysate_aspirate_height_inc" : 0.4,
-
   "lysate_aspirate_volume" : 3,
-
   "lysate_aspirate_rate" : 0.2,
-
   "lysate_dispense_volume" : 2.5,
-
   "lysate_dispense_rate" : 0.1,
-
   "lysate_dispense_well_bottom_clearance" : 0.1,
 
   "substrates_aspirate_height_init" : 8.6,
