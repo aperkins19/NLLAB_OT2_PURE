@@ -1,27 +1,29 @@
-{ "temp_module_name": "temperature module gen2",
+{
+  "temp_module": {"name": "temperature module gen2", "deck_position": "10"},
 
-  "temp_module_pos": "10",
+  "pcr_temp_plate": {"name": "biorad_96_wellplate_200ul_pcr",
+                     "offsets":{"x": 0.30, "y": 1.40, "z": 10.20}
+                   },
 
-  "pcr_temp_plate_name": "biorad_96_wellplate_200ul_pcr",
+  "nunc_384": {"name": "corning_384_wellplate_112ul_flat", "deck_position": "7",
+                        "offsets":{"x": 0.00, "y": 0.60, "z": 0.60}
+          },
 
-  "nunc_384_name": "corning_384_wellplate_112ul_flat",
+  "eppendorf_1500ul_x24_rack": {"name": "opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap", "deck_position": "8",
+                        "offsets":{"x":1.10, "y": 1.10, "z": 1.80}
+          },
 
-  "nunc_384_pos": "7",
+  "tiprack_20ul": {"name": "opentrons_96_tiprack_20ul", "deck_position": "9",
+                        "offsets":{"x": 0.10, "y": 0.30, "z": 0.60}
+          },
 
-  "eppendorf_1500ul_x24_rack_name": "opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap",
+  "tiprack_300ul": {"name": "opentrons_96_tiprack_300ul", "deck_position": "6",
+                        "offsets":{"x": 0.40, "y": 0.80, "z": 0.00}
+          },
 
-  "eppendorf_1500ul_x24_rack_pos": "8",
+  "left_pipette": {"name": "p20_single_gen2"},
 
-  "tiprack_20ul_name": "opentrons_96_tiprack_20ul",
+  "right_pipette": {"name": "p300_single_gen2"}
 
-  "tiprack_20ul_pos": "9",
-
-  "tiprack_300ul_name": "opentrons_96_tiprack_300ul",
-
-  "tiprack_300ul_pos": "6",
-
-  "left_pipette_name": "p20_single_gen2",
-
-  "right_pipette_name": "p300_single_gen2"
 
 }
