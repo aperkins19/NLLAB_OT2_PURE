@@ -2,11 +2,6 @@
 
 Instructions for deploying the analysis environment and descriptions of the code and workflows within.
 
-##### Bugs /  Opentrons Feedback
-* Offset calibrations file can't be found
-* Could they sell a bolt on self calibrator for those who need more consistant work?
-
-
 
 # Usage
 
